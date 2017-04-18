@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+#sqlite
+django_practice/django_practice/db.sqlite3
