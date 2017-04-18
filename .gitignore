@@ -90,3 +90,4 @@ ENV/
 
 #sqlite
 django_practice/django_practice/db.sqlite3
+db.*
