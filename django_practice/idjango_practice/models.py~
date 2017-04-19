@@ -1,0 +1,9 @@
+from __future__ import unicode_literals
+
+from django.db import models
+
+class Django_practice(models.Model):
+    amount = models.IntegerField()
+    date = models.DateTimeField()
+    concept = models.TextField(max_length = 50)
+# Create your models here.
