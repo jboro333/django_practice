@@ -12,8 +12,11 @@ class Artist(models.Model):
     url = models.URLField()
     user = models.ForeignKey(User)
 
-    def getArtistInfo(self, id_artist):
+    def getArtistInfo(self):
         return "Artist name: " + self.artist_name
+
+    def __unicode__(self):
+        return u"%s" % self.artist_name
 
     def getArtistUrl(self):
         pass
@@ -27,6 +30,9 @@ class Album(models.Model):
 
     def getAlbumInfo(self):
         return "Album name: " + self.album_name
+
+    def __unicode__(self):
+        return u"%s" % self.album_name
 
     def getAlbumUrl(self):
         pass
@@ -42,6 +48,9 @@ class Song(models.Model):
     def getSongInfo(self):
         return "Song name: " + self.song_name
 
+    def __unicode__(self):
+        return u"%s" % self.song_name
+
     def getSongUrl(self):
         pass
 
@@ -54,6 +63,9 @@ class PlayList(models.Model):
 
     def getPlayListInfo(self):
         return "Play list name: " + self.name_playlist
+
+    def __unicode__(self):
+        return u"%s" % self.name_playlist
 
     def getPlayListUrl(self):
         pass
