@@ -1,0 +1,18 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.template import Context
+
+
+
+def mainpage(request): # objecte de tipus http request k em proporciona django
+	template = get_template()
+	variables = Context ({
+    	'appname' : "electrosobres",
+    	'titlepage' : 'sobres',
+    	"author" : 'Luis Barcenas'
+	}) # objecte tipus context k es construeix a partir d un diccionari
+	page =  template.render(variables)
+	return HttpResponse(page)
+
+
