@@ -31,12 +31,13 @@ class Album(models.Model):
     def getAlbumInfo(self):
         return "Album name: " + self.album_name
 
-    def __unicode__(self):
+		""" 
+		def __unicode__(self):
         return u"%s" % self.album_name
 
     def getAlbumUrl(self):
         pass
-
+		"""
 
 class Song(models.Model):
     id_song = models.IntegerField()
@@ -47,14 +48,13 @@ class Song(models.Model):
 
     def getSongInfo(self):
         return "Song name: " + self.song_name
-
+		"""
     def __unicode__(self):
         return u"%s" % self.song_name
 
     def getSongUrl(self):
         pass
-
-
+  	"""     
 class PlayList(models.Model):
     id_playlist = models.IntegerField()
     name_playlist = models.TextField()
@@ -64,21 +64,14 @@ class PlayList(models.Model):
 
     def getPlayListInfo(self):
         return "Play list name: " + self.name_playlist
-
+		"""
     def __unicode__(self):
         return u"%s" % self.name_playlist
 
     def getPlayListUrl(self):
         pass
 
-
-# creo que esta clase no es necesaria
-class User(models.Model):
-    id_user = models.IntegerField()
-    name_user = models.TextField()
-
-    def getAlbumInfo(slef):
-        pass
+		"""
 
 
 
