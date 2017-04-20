@@ -6,4 +6,5 @@ admin.site.register(Artist)
 admin.site.register(Song)
 admin.site.register(Album)
 admin.site.register(User)
+admin.site.register(Playlist)
 # Register your models here.

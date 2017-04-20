@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import User,Admin
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -33,4 +33,11 @@ class User(models.Model):
     name_user = models.TextField()
 
     def getAlbumInfo(slef):
+        pass
+
+class Playlist(models.Model):
+    id_playlist = models.IntegerField()
+    name_playlist = models.TextField()
+
+    def getPlaylist(slef):
         pass

@@ -34,3 +34,5 @@ class User(models.Model):
 
     def getAlbumInfo(slef):
         pass
+
+
