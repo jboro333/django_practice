@@ -14,13 +14,14 @@ class Artist(models.Model):
 
     def getArtistInfo(self):
         return "Artist name: " + self.artist_name
-		"""
+	"""
     def __unicode__(self):
         return u"%s" % self.artist_name
 
     def getArtistUrl(self):
         pass
-		"""
+    """
+
 
 class Album(models.Model):
     id_album = models.IntegerField()
@@ -30,14 +31,14 @@ class Album(models.Model):
 
     def getAlbumInfo(self):
         return "Album name: " + self.album_name
-
-		""" 
-		def __unicode__(self):
+    """
+    def __unicode__(self):
         return u"%s" % self.album_name
 
     def getAlbumUrl(self):
         pass
-		"""
+        """
+
 
 class Song(models.Model):
     id_song = models.IntegerField()
@@ -48,31 +49,28 @@ class Song(models.Model):
 
     def getSongInfo(self):
         return "Song name: " + self.song_name
-		"""
+    """
     def __unicode__(self):
         return u"%s" % self.song_name
 
     def getSongUrl(self):
         pass
-  	"""     
+        """
+
+
 class PlayList(models.Model):
     id_playlist = models.IntegerField()
     name_playlist = models.TextField()
     songs = models.ForeignKey(Song)
     url = models.URLField()
-    #playlist = models.ForeignKey(PlayList)
+    # playlist = models.ForeignKey(PlayList)
 
     def getPlayListInfo(self):
         return "Play list name: " + self.name_playlist
-		"""
+    """
     def __unicode__(self):
         return u"%s" % self.name_playlist
 
     def getPlayListUrl(self):
         pass
-
-		"""
-
-
-
-
+        """
