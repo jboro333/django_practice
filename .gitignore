@@ -96,4 +96,5 @@ django_practice/db.sqlite3
 django_practice/django_practice/db.sqlite3
 db.*
 
-#.DS_Store
+# archivos invisibles de mac
+.DS_Store
