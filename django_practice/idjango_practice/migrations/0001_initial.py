@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -18,10 +20,21 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Artista',
+            name='ArtistUser',
             fields=[
                 ('id_artista', models.AutoField(serialize=False, primary_key=True)),
-                ('name_artista', models.TextField(max_length=50)),
+                ('is_artist', models.BooleanField(default=True)),
+                ('name', models.TextField(max_length=50)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='NormalUser',
+            fields=[
+                ('id_user', models.AutoField(serialize=False, primary_key=True)),
+                ('is_artist', models.BooleanField(default=False)),
+                ('name', models.TextField(max_length=50)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -37,12 +50,22 @@ class Migration(migrations.Migration):
                 ('id_song', models.AutoField(serialize=False, primary_key=True)),
                 ('name_song', models.TextField(max_length=50)),
                 ('album', models.ForeignKey(to='idjango_practice.Album')),
-                ('artista', models.ForeignKey(to='idjango_practice.Artista')),
+                ('artist', models.ForeignKey(default=-1, to='idjango_practice.ArtistUser')),
             ],
+        ),
+        migrations.AddField(
+            model_name='playlist',
+            name='songs',
+            field=models.ManyToManyField(to='idjango_practice.Song'),
+        ),
+        migrations.AddField(
+            model_name='playlist',
+            name='user',
+            field=models.ForeignKey(default=-1, to='idjango_practice.NormalUser'),
         ),
         migrations.AddField(
             model_name='album',
             name='artista',
-            field=models.ForeignKey(to='idjango_practice.Artista'),
+            field=models.ForeignKey(to='idjango_practice.ArtistUser'),
         ),
     ]
