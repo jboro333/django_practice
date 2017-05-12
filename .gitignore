@@ -93,3 +93,7 @@ ENV/
 
 # archivos de word
 .odt
+
+# base de datos
+.db
+.sqlite3
