@@ -98,3 +98,6 @@ db.*
 
 # archivos invisibles de mac
 .DS_Store
+
+# archivos de word
+.odt
