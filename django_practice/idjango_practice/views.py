@@ -1,15 +1,45 @@
 from django.shortcuts import render
-# from .forms import NormalUserForm
+from .forms import RegisterForm, LoginForm, ContactForm, ArtistForm, AlbumForm, SongForm, PlaylistForm
 # from django.template import RequestContext
-from .models import NormalUser  # ArtistUser
-from django.views.generic import DetailView
+# from django.views.generic import DetailView
 
 
 # Create your views here.
-class Home(DetailView):
-    model = NormalUser
-    # template =
-
-
 def home(request):
     return render(request, "home.html", {})
+
+
+def register(request):
+    form = RegisterForm()
+    context = {
+        "register_form": form
+    }
+    return render(request, "register.html", context)
+
+
+def login(request):
+    form = LoginForm
+    context = {
+        "login_form": form
+    }
+    return render(request, "login.html", context)
+
+
+def contact(request):
+    return render(request, "contact.hmtl", {})
+
+
+def playlist(request):
+    return render(request, "playlist.html", {})
+
+
+def song(request):
+    return render(request, "song.html", {})
+
+
+def artist(request):
+    return render(request, "artist.html", {})
+
+
+def album(request):
+    return render(request, "album.html", {})

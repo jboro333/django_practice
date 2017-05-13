@@ -1,9 +1,21 @@
 from django import forms
 from django.forms import ModelForm
-from idjango_practice.models import NormalUser, ArtistUser
+from .models import Artist
+from django.contrib.auth.models import User
 
 
-class RegisterForm(forms.Form):
+class RegisterForm(ModelForm):
+    class Meta:
+        model = User
+        exclude = ("last_login", "date_joined", "is_active", "is_staff", "la\
+        st_name", "first_name", "is_superuser", "id")
+
+
+class LoginForm(forms.Form):
+    pass
+
+
+class ContactForm(forms.Form):
     pass
 
 
@@ -19,9 +31,7 @@ class SongForm(ModelForm):
     pass
 
 
-class ArtistUserForm(ModelForm):
-    model = ArtistUser
-
-
-class NormalUserForm(ModelForm):
-    model = NormalUser
+class ArtistForm(ModelForm):
+    class Meta:
+        model = Artist
+        exclude = ()
