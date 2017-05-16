@@ -1,10 +1,12 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Artist
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # , UserModel
+from django.contrib.auth.forms import UserCreationForm
+# from django.users import UserModel  # , UserNameField
 
 
-class RegisterForm(ModelForm):
+class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         exclude = ("last_login", "date_joined", "is_active", "is_staff", "la\
@@ -12,7 +14,8 @@ class RegisterForm(ModelForm):
 
 
 class LoginForm(forms.Form):
-    pass
+    class Meta:
+        form = 
 
 
 class ContactForm(forms.Form):
