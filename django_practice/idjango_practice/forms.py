@@ -21,18 +21,6 @@ class RegisterForm(UserCreationForm):
         fields = ()
         exclude = ("id_user", "user_id")
 
-        def save(self, commit=True):
-            user = super(RegisterForm, self).save(commit=False)
-            user.email = self.cleaned_data['email']
-            user.first_name = self.cleaned_data['First name']
-            user.last_name = self.cleaned_data['Last name']
-            user.birthday = self.cleaned_data['Birthday']
-
-        if commit:
-            user.save()
-
-        return user
-
 
 class LoginForm(forms.Form):
     pass
