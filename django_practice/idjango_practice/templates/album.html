@@ -13,6 +13,7 @@
             <ul>
               <li><a href="/register">Registro</a></li>
               <li><a href="/login">Login</a></li>
+              <li><a href="/contact">Contacto</a></li>
             </ul>
         </nav>
         <nav>
@@ -21,10 +22,16 @@
               <li><a href="/artist">Artists</a></li>
               <li><a href="/album">Albums</a></li>
               <li><a href="/song">Songs</a></li>
+              <li><a href="/playlist">Playlist</a></li>
             </ul>
         </nav>
       </header>
     <section>
+      <h3>Create new Album</h3
+      <form metho="POST" action="">
+          {% csrf_token%}
+          {{ album_registration_form.as_p }}
+      </form>
     </section>
     <footer>
         <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>

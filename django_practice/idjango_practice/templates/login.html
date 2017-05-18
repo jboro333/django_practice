@@ -13,6 +13,7 @@
             <ul>
                 <li><a href="/register">Registro</a></li>
                 <li><a href="/login">Login</a></li>
+                <li><a href="/contact">Contacto</a></li>
             </ul>
         </nav>
         <nav>
@@ -29,7 +30,7 @@
         <h3>Access</h3
         <form metho="POST" action="">
                 {% csrf_token%}
-                {{ login_form }}
+                {{ login_form.as_p }}
             </form>
       </articles>
     </section>

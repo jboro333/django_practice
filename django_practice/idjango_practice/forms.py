@@ -1,37 +1,65 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Artist
-from django.contrib.auth.models import User  # , UserModel
+# from registration.forms import RegistrationForm
+from .models import Artist, Song, Album, Playlist, OwnUser
 from django.contrib.auth.forms import UserCreationForm
+
+# from django.contrib.auth.models import User  # , UserModel
+# from django.contrib.auth.forms import UserCreationForm
+# from registration.forms import RegistrationForm
 # from django.users import UserModel  # , UserNameField
 
 
 class RegisterForm(UserCreationForm):
+    # __metaclass__ = classmaker()
     class Meta:
-        model = User
-        exclude = ("last_login", "date_joined", "is_active", "is_staff", "la\
-        st_name", "first_name", "is_superuser", "id")
+        email = forms.EmailField(required=True)
+        first_name = forms.CharField(required=False)
+        last_name = forms.CharField(required=False)
+
+        model = OwnUser
+        fields = ()
+        exclude = ("id_user", "user_id")
+
+        def save(self, commit=True):
+            user = super(RegisterForm, self).save(commit=False)
+            user.email = self.cleaned_data['email']
+            user.first_name = self.cleaned_data['First name']
+            user.last_name = self.cleaned_data['Last name']
+            user.birthday = self.cleaned_data['Birthday']
+
+        if commit:
+            user.save()
+
+        return user
 
 
 class LoginForm(forms.Form):
-    class Meta:
-        form = 
+    pass
 
 
 class ContactForm(forms.Form):
-    pass
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    topic = forms.CharField(max_length=500)
 
 
 class PlaylistForm(ModelForm):
-    pass
+    class Meta:
+        model = Playlist
+        exclude = ()
 
 
 class AlbumForm(ModelForm):
-    pass
+    class Meta:
+        model = Album
+        exclude = ()
 
 
 class SongForm(ModelForm):
-    pass
+    class Meta:
+        model = Song
+        exclude = ()
 
 
 class ArtistForm(ModelForm):

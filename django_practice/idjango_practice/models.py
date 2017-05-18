@@ -3,6 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class OwnUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_artist = models.BooleanField(default=False)
+
+
 class Artist(models.Model):
     id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
@@ -18,7 +23,7 @@ class Artist(models.Model):
 class Album(models.Model):
     id_album = models.AutoField(primary_key=True)
     name_album = models.TextField(max_length=50)
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(Artist, default=-1)
 
     def __unicode__(self):
             return self.name_album

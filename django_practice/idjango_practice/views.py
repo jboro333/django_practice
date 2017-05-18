@@ -1,5 +1,5 @@
-from django.shortcuts import render, render_to_response
-from django.template.context import RequestContext
+from django.shortcuts import render  # render_to_response
+# from django.template.context import RequestContext
 from .forms import RegisterForm, LoginForm, ContactForm, ArtistForm
 from .forms import AlbumForm, SongForm, PlaylistForm
 # from django.template import RequestContext
@@ -13,7 +13,7 @@ def home(request):
 
 
 def register(request):
-    form = RegisterForm()
+    form = RegisterForm
     context = {
         "register_form": form
     }
@@ -21,30 +21,52 @@ def register(request):
 
 
 def login(request):
-    # form = LoginForm
-    # context = {
-    #    "login_form": form
-    # }
-    # return render(request, "login.html", context)
+    form = LoginForm
+    context = {
+        "login_form": form
+    }
+    return render(request, "login.html", context)
+    """
     context_instance = RequestContext(request)
     return render_to_response('login.html', {}, context_instance)
+    """
 
 
 def contact(request):
-    return render(request, "contact.hmtl", {})
+    form = ContactForm
+    context = {
+        "contact_form": form
+    }
+    return render(request, "contact.html", context)
 
 
 def playlist(request):
-    return render(request, "playlist.html", {})
+    form = PlaylistForm
+    context = {
+        "playlist_registration_form": form
+    }
+    return render(request, "playlist.html", context)
 
 
 def song(request):
-    return render(request, "song.html", {})
+    form = SongForm
+    context = {
+        "song_registration_form": form
+    }
+    return render(request, "song.html", context)
 
 
 def artist(request):
-    return render(request, "artist.html", {})
+    form = ArtistForm
+    context = {
+        "artist_registration_form": form
+    }
+    return render(request, "artist.html", context)
 
 
 def album(request):
-    return render(request, "album.html", {})
+    form = AlbumForm
+    context = {
+        "album_registration_form": form
+    }
+    return render(request, "album.html", context)
