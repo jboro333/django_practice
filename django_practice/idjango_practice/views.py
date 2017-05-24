@@ -10,10 +10,11 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth import login
+from django.contrib.auth.models import User
+# from django.contrib.auth import login
 
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -25,28 +26,53 @@ def home(request):
     return render(request, "home.html", {})
 
 
+class Register(CreateView):
+    model = User
+    templae_name = 'templates/register.html'
+    form_class = RegisterForm
+    success_url = reverse_lazy('')
+
+
+"""
 def register(request):
-    form = RegisterForm
+    form = RegisterForm(request.POST)
+    if form.is_valid():
+        form_data = form.cleaned_data
+        obj = User()
+        obj.email = form_data.get("email")
+        obj.password = form_data.get("password")
+        obj.save()
     context = {
         "register_form": form
     }
     return render(request, "register.html", context)
+"""
 
-
-class Login(FormView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-    success_url = reverse_lazy("personas:bienvenida")
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return super(Login, self).dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        login(self.request, form.get_user())
-        return super(Login, self).form_valid(form)
+"""
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            form_data = form.cleaned_data  # obtenemos la info del formulario
+            obj = SportSession()
+            obj.name = form_data.get("name")
+            obj.sport_type = form_data.get("sport_type")
+            obj.date = date.today()
+            # si el usuario esta registrado:
+            # else:
+            obj.user = request.user.id
+            obj.save()
+    else:
+        form = SportSessionForm()
+    context = {
+        "sport_session_form": form,
+    }
+    return render(request, "login.html", context)
+    form = LoginForm
+    context = {
+        "login_form": form
+    }
+    return render(request, "login.html", context)
 
 
 class CheckIsOwnerMixin(object):
@@ -55,6 +81,7 @@ class CheckIsOwnerMixin(object):
         if not obj.user == self.request.user:
             raise PermissionDenied
         return obj
+"""
 
 
 def contact(request):

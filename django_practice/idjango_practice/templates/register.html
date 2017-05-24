@@ -43,9 +43,6 @@
   </script>
 </head>
 <body>
-
-
-
     <header>
         <!-- <img src="http... -->
         <h1><a href="/">Tu Música</a></h1>
@@ -68,9 +65,10 @@
     <section>
       <article>
         <h3>Register</h3
-        <form metho="POST" action="">
+        <form method="POST" action="">{% csrf_token %}
             {% csrf_token%}
             {{ register_form.as_p }}
+            <input type ="submit" value="Aceptar"/>
         </form>
       </article>
     </section>
