@@ -13,18 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
 from idjango_practice import views
+# from views import ArtistDetail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
-    url(r'^login', views.login, name="login"),
+    # url(r'^login', views.login, name="login"),
     url(r'^register', views.register, name="register"),
     url(r'^contact', views.contact, name="contact"),
-    url(r'^artist', views.artist, name="artist"),
-    url(r'^song', views.song, name="song"),
-    url(r'^album', views.album, name="album"),
-    url(r'^playlist', views.playlist, name="playlist")
+    # url(r'^artist', ArtistDetail, name="artist"),
+    # url(r'^song', views.song, name="song"),
+    # url(r'^album', views.album, name="album"),
+    # url(r'^playlist', views.playlist, name="playlist"),
+    url(r'^accounts/logout/$', login, name='login'),
+    url(r'^accounts/login/$', logout, name='logout')
+    # url(r'yourmusic/', include('idjango_prac
+    # tice.urls', namespace='yourmusic'))
 ]
