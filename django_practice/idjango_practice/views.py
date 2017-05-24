@@ -1,14 +1,19 @@
-from django.shortcuts import render, render_to_response
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 # from django.template.context import RequestContext
 from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
+
 from django.views.generic import DetailView
-from django.views.generic import CreateView  # , UpdateView
+from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, render_to_response
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import AuthenticationForm
+from django.http.response import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth import login
 
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -28,10 +33,20 @@ def register(request):
     return render(request, "register.html", context)
 
 
-class LoginRequiredMixin(object):
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+class Login(FormView):
+    form_class = AuthenticationForm
+    template_name = 'login.html'
+    success_url = reverse_lazy("personas:bienvenida")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(Login, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+        return super(Login, self).form_valid(form)
 
 
 class CheckIsOwnerMixin(object):

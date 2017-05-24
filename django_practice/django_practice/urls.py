@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-# from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import login, logout
 from idjango_practice import views
 
 urlpatterns = [
@@ -28,7 +28,6 @@ urlpatterns = [
     # url(r'^song', views.song, name="song"),
     # url(r'^album', views.album, name="album"),
     # url(r'^playlist', views.playlist, name="playlist"),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    url(r'^yourmusic/', include('django_practice.urls', namespace='yourmusic'))
+    # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^login/$', views.Login, name="login")
 ]
