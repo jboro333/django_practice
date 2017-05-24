@@ -28,10 +28,14 @@ def register(request):
     return render(request, "register.html", context)
 
 
-class LoginRequiredMixin(object):
+class Login(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+        return super(Login, self).dispatch(*args, **kwargs)
+
+    def get_view(self, **kwargs):
+        context = super(PlaylistDetail, self)
+        return context
 
 
 class CheckIsOwnerMixin(object):
