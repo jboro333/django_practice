@@ -1,41 +1,16 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-				 <link	rel="stylesheet"
-										href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
-				<script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
-				<script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-    <meta charset="utf-8">
-    <title>Tu Música</title>
-    <link rel="stylesheet" href="style.css">
-    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />-->
-</head>
-<body>
-    <header>
-        <!-- <img src="http... -->
-        <h1><a href="/">Tu Música</a></h1>
-        <nav>
-            <ul>
-              <li><a href="/register">Registro</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/contact">Contacto</a></li>
-            </ul>
-        </nav>
-        <nav>
-          <h3>Menú</h3
-            <ul>
-              <li><a href="/artist">Artists</a></li>
-              <li><a href="/album">Albums</a></li>
-              <li><a href="/song">Songs</a></li>
-              <li><a href="/playlist">Playlist</a></li>
-            </ul>
-        </nav>
-      </header>
-    <section>
-    </section>
-    <footer>
-        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
-    </footer>
-</body>
+<div id="header">
+      {% block header %}
+          {% if user.username %}
+              <p>User {{ user.username }} (<a href="/accounts/logout/?next=/myrestaurants/">logout</a>)</p>
+          {% else %}
+              <p><a href="/accounts/login/?next=/myrestaurants/">Sign in</a></p>
+          {% endif %}
+      {% endblock %}
+  </div>
+  <div id="sidebar">
+      {% block sidebar %}
+          <ul>
+              <li><a href="/myrestaurants/">Home</a></li>
+          </ul>
+      {% endblock %}
+  </div>

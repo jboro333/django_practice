@@ -12,7 +12,8 @@
         <nav>
             <ul>
               <li><a href="/register">Registro</a></li>
-              <li><a href="/login">Login</a></li>
+              <!--<li><a href="/accounts/login">Login</a></li>-->
+              <li><p><a href="{% url 'login' %}?next={{request.path}}">login</a></p></li>
               <li><a href="/contact">Contacto</a></li>
             </ul>
         </nav>

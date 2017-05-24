@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
-from djnago.utils.decorators import method_decorator
+from django.utils.decorators import method_decorator
 # from django.template.context import RequestContext
 from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
@@ -8,6 +8,7 @@ from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from django.views.generic import DetailView
 from django.views.generic import CreateView  # , UpdateView
+from django.core.exceptions import PermissionDenied
 
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -28,9 +29,17 @@ def register(request):
 
 
 class LoginRequiredMixin(object):
-    @method_decorator(login_required())
+    @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
+class CheckIsOwnerMixin(object):
+    def get_object(self, *args, **kwargs):
+        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied
+        return obj
 
 
 def contact(request):
