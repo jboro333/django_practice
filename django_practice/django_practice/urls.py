@@ -29,8 +29,7 @@ urlpatterns = [
     # url(r'^song', views.song, name="song"),
     # url(r'^album', views.album, name="album"),
     # url(r'^playlist', views.playlist, name="playlist"),
-    url(r'^accounts/logout/$', login, name='login'),
-    url(r'^accounts/login/$', logout, name='logout')
-    # url(r'yourmusic/', include('idjango_prac
-    # tice.urls', namespace='yourmusic'))
+    url(r'^accounts/logout/$', logout, name='logout'),
+    url(r'^accounts/login/$', login, name='login'),
+    url(r'^yourmusic/', include('django_practice.urls', namespace='yourmusic'))
 ]

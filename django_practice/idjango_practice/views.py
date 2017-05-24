@@ -1,8 +1,11 @@
-from django.shortcuts import render  # render_to_response
+from django.shortcuts import render, render_to_response
+from django.contrib.auth.decorators import login_required
+from djnago.utils.decorators import method_decorator
 # from django.template.context import RequestContext
 from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
+from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from django.views.generic import DetailView
 from django.views.generic import CreateView  # , UpdateView
 
@@ -24,16 +27,10 @@ def register(request):
     return render(request, "register.html", context)
 
 
-def login(request):
-    form = LoginForm
-    context = {
-        "login_form": form
-    }
-    return render(request, "login.html", context)
-    """
-    context_instance = RequestContext(request)
-    return render_to_response('login.html', {}, context_instance)
-    """
+class LoginRequiredMixin(object):
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
 def contact(request):
@@ -56,6 +53,7 @@ class PlaylistDetail(DetailView):
 class PlaylistCreate(CreateView):
     model = Playlist
     template_name = 'yourmusic/playlist_create.html'
+    form_class = PlaylistForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -69,11 +67,16 @@ class SongDetail(DetailView):
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
         return context
+    """
+    def song_review(request, pk):
+        artist = get_object
+    """
 
 
 class SongCreate(CreateView):
     model = Song
     template_name = 'yourmusic/playlist_create.html'
+    form_class = SongForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -92,6 +95,7 @@ class ArtistDetail(DetailView):
 class ArtistCreate(CreateView):
     model = Artist
     template_name = 'yourmusic/artist_create.html'
+    form_class = ArtistForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -110,6 +114,7 @@ class AlbumDetail(DetailView):
 class AlbumCreate(CreateView):
     model = Album
     template_name = 'yourmusic/album_create.html'
+    form_class = AlbumForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
