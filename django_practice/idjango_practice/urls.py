@@ -10,12 +10,15 @@ from forms import SongForm, PlaylistForm, AlbumForm, ArtistForm
 from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
     PlaylistDetail, PlaylistCreate, ArtistDetail, ArtistCreate
 
+
+"""
 urlpatterns = [
     url(r'^$',
         ListView.as_view(
-            queryset=Song.objects.filter(date__lte=timezone.now()).order_by('-d \
+            queryset=Song.objects.filter(date__lte=timezone.now()).order_by('-d
                 ate')[:5],
             context_object_name='latest_restaurant_list',
             template_name='myrestaurants/restaurant_list.html'),
         name='restaurant_list')
 ]
+"""
