@@ -8,8 +8,9 @@ from django.views.generic import DetailView, ListView, UpdateView
 from model import Playlist, Song, Album, Artist
 from forms import SongForm, PlaylistForm, AlbumForm, ArtistForm
 from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
-    PlaylistDetail, PlaylistCreate, ArtistDetail, ArtistCreate, Register
-
+    PlaylistDetail, PlaylistCreate, ArtistDetail, ArtistCreate, Register, \
+    APISongList, APISongDetail, APIPlaylistList, APIPlaylistDetail, \
+    APIArtistList, APIArtistDetail, APIAlbumList, APIAlbumDetail
 
 urlpatterns = [
     url(r'^register', Register.as_view(), name='register')
@@ -23,4 +24,25 @@ urlpatterns = [
             template_name='myrestaurants/restaurant_list.html'),
         name='restaurant_list')
 ]
+
+
 """
+urlpatterns += [
+    # RESTful API
+    url(r'^api/artist/$',
+        APIArtistList.as_view(), name='artist-list'),
+    url(r'^api/artist/(?P<pk>\d+)/$',
+        APIArtistDetail.as_view(), name='artist-detail'),
+    url(r'^api/playlist/$',
+        login_required(APIPlaylistList.as_view()), name='playlist-list'),
+    url(r'^api/playlist/(?P<pk>\d+)/$',
+        APIPlaylistDetail.as_view(), name='playlist-detail'),
+    url(r'^api/song/$',
+        APISongList.as_view(), name='song-list'),
+    url(r'^api/song/(?P<pk>\d+)/$',
+        APISongDetail.as_view(), name='song-detail'),
+    url(r'^api/album/$',
+        APIAlbumList.as_view(), name='album-list'),
+    url(r'^api/song/(?P<pk>\d+)/$',
+        APIAlbumDetail.as_view(), name='album-detail'),
+]
