@@ -1,21 +1,19 @@
 #<<<<<<< HEAD
 
-from rest_framework import serializers
-#=======
 #>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
 from rest_framework.fields import CharField
-from rest_framework.relations import HyperlinkedRelatedField
-from rest_framework.relations import HyperlinkedIdentityField
+from rest_framework.relations import HyperlinkedRelatedField, HyperlinkedIdentityField
 from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework import *
 #<<<<<<< HEAD
 from models import *
 #=======
-from models import Artist, Album, Song, Playlist
+#from models import Artist, Album, Song, Playlist
 #>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
 
 
 #<<<<<<< HEAD
-class ArtistSerializer(HyperlinkedModelSerializer):
+class ArtistSerializer(serializers.HyperlinkedModelSerializer):
  uri = HyperlinkedIdentityField(view_name='TuMusica:artist-detail')
  album = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica:album-detail')
  song = HyperlinkedRelatedField(many=True, read_only=True,view_name='TuMusica_song-detail')
@@ -24,7 +22,7 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
  class Meta:
      model = Artist
-     fields = ('uri', 'user','name_artist','album', 'song','playlist_set')
+     fields = ('uri','song','playlist_set','user','name_artist','album')
 
 #=======
 #class ArtistSerializer(HyperlinkedModelSerializer):

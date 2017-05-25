@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from idjango_practice import views
 from idjango_practice.views import *
+from django.views.generic import DetailView, ListView, UpdateView
+from idjango_practice.views import *
+from idjango_practice.forms import *
+from idjango_practice.models import *
+from idjango_practice.serializers import *
 # from idjango_practice.views import Register
 
 urlpatterns = [
