@@ -3,14 +3,14 @@ from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
-<<<<<<< HEAD
+#<<<<<<< HEAD
 from  serializers  import *
 
-=======
+#=======
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
->>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
+#>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.core.exceptions import PermissionDenied

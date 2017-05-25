@@ -13,15 +13,15 @@ from django.contrib.auth.models import User
 
 class RegisterForm(UserCreationForm):
     class Meta:
-<<<<<<< HEAD
-        
+#<<<<<<< HEAD
+
         email = forms.EmailField(required=True)
         first_name = forms.CharField(required=False)
         last_name = forms.CharField(required=False)
 
         model = OwnUser
         fields = ()
-=======
+#=======
         model = User
         fields = [
             'username'
@@ -32,7 +32,7 @@ class RegisterForm(UserCreationForm):
             # 'email': 'Email',
             'username': 'User name'
         }
->>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
+#>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
         exclude = ("id_user", "user_id")
 
 

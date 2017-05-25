@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from idjango_practice import views
+from idjango_practice.views import *
 # from idjango_practice.views import Register
 
 urlpatterns = [
@@ -33,4 +34,23 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login")
+#urlpatterns += [
+        # RESTful API
+    url(r'^api/artist/$',
+            APIArtistList.as_view(), name='artist-list'),
+    url(r'^api/artist/(?P<pk>\d+)/$',
+            APIArtistDetail.as_view(), name='artist-detail'),
+    url(r'^api/playlist/$',
+            login_required(APIPlaylistList.as_view()), name='playlist-list'),
+    url(r'^api/playlist/(?P<pk>\d+)/$',
+            APIPlaylistDetail.as_view(), name='playlist-detail'),
+    url(r'^api/song/$',
+            APISongList.as_view(), name='song-list'),
+    url(r'^api/song/(?P<pk>\d+)/$',
+            APISongDetail.as_view(), name='song-detail'),
+    url(r'^api/album/$',
+            APIAlbumList.as_view(), name='album-list'),
+    url(r'^api/song/(?P<pk>\d+)/$',
+            APIAlbumDetail.as_view(), name='album-detail'),
+    #]
 ]
