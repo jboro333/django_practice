@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class OwnUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #USERNAME_FIELD = models.CharField
     is_artist = models.BooleanField(default=False)
 
 

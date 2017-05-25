@@ -3,7 +3,7 @@ from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
-from  serializers  import  ArtistSerializer,  AlbumSerializer,  SongSerializer, PlaylistSerializer
+from  serializers  import *
 
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
@@ -20,6 +20,9 @@ from  rest_framework  import  generics
 from  rest_framework.decorators  import  api_view
 from  rest_framework.response  import  Response
 from  rest_framework.reverse  import  reverse
+
+from rest_framework import permissions, generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -159,7 +162,7 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
         if request.method in permissions.SAFE_METHODS:
             return True
-        .
+
         return obj.user == request.user
 
 class APIArtistList(generics.ListCreateAPIView):
