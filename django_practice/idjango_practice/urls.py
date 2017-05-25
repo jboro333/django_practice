@@ -15,18 +15,7 @@ from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
 urlpatterns = [
     url(r'^register', Register.as_view(), name='register')
 ]
-"""
-    url(r'^$',
-        ListView.as_view(
-            queryset=Song.objects.filter(date__lte=timezone.now()).order_by('-d
-                ate')[:5],
-            context_object_name='latest_restaurant_list',
-            template_name='myrestaurants/restaurant_list.html'),
-        name='restaurant_list')
-]
 
-
-"""
 urlpatterns += [
     # RESTful API
     url(r'^api/artist/$',
@@ -46,3 +35,17 @@ urlpatterns += [
     url(r'^api/song/(?P<pk>\d+)/$',
         APIAlbumDetail.as_view(), name='album-detail'),
 ]
+
+
+"""
+    url(r'^$',
+        ListView.as_view(
+            queryset=Song.objects.filter(date__lte=timezone.now()).order_by('-d
+                ate')[:5],
+            context_object_name='latest_restaurant_list',
+            template_name='myrestaurants/restaurant_list.html'),
+        name='restaurant_list')
+]
+
+
+"""

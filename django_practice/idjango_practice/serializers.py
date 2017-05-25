@@ -6,14 +6,13 @@ from models import Artist, Album, Song, Playlist
 
 
 class ArtistSerializer(HyperlinkedModelSerializer):
-
     uri = HyperlinkedIdentityField(view_name='TuMusica:artist-detail')
     album = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusic \
         a:album-detail')
     song = HyperlinkedRelatedField(many=True, read_only=True,
-    view_name='TuMusica_song-detail')
+        view_name='TuMusica_song-detail')
     playlist_set = HyperlinkedRelatedField(many=True, read_only=True,
-    view_name='TuMusica:playlist-detail')
+        view_name='TuMusica:playlist-detail')
     user = CharField(read_only=True)
 
     class Meta:
@@ -23,8 +22,9 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
 class AlbumSerializer(HyperlinkedModelSerializer):
     uri = HyperlinkedIdentityField(view_name='TuMusica:album-detail')
-    artist = HyperlinkedRelatedField(view_name='TuMusica:artist-detail', read_only=True)
-    songs = HyperlinkedRelatedField(many=True, read_only=True,view_name='TuMusica_song-detail')
+    artist = HyperlinkedRelatedField(view_name='TuMusica:artist-detail',
+    read_only=True)
+    songs = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica_song-detail')
     user = CharField(read_only=True)
 
     class Meta:
