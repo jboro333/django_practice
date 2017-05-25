@@ -24,12 +24,12 @@ from django.contrib.auth.models import User
 from rest_framework import permissions, generics
 # from django.contrib.auth import login
 
-from rest_framework import generics
+#from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from rest_framework import permissions, generics
+#from rest_framework import permissions, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # from django.template import RequestContext
@@ -207,6 +207,10 @@ class APIArtistList(generics.ListCreateAPIView):
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+
+    def get_context(self, **kwargs):
+        context = super(ArtistDetail, self).get_context_data(**kwargs)
+        return context
 
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):

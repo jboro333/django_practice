@@ -33,7 +33,7 @@ urlpatterns = [
     # url(r'^album', views.album, name="album"),
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # url(r'^login', views.login, name="login")
+    #url(r'^login', views.login, name="login")
 #urlpatterns += [
         # RESTful API
     url(r'^api/artist/$',

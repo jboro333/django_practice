@@ -24,7 +24,7 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
  class Meta:
      model = Artist
-     fields = ('uri', 'id_artist','name_artist','albums', 'songs')
+     fields = ('uri', 'user','name_artist','album', 'song','playlist_set')
 
 #=======
 #class ArtistSerializer(HyperlinkedModelSerializer):
@@ -52,7 +52,7 @@ class AlbumSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Album
-        fields = ('uri', ' name_album', 'artist')
+        fields = ('uri', 'artist','user','songs')
 
 
 class SongSerializer(HyperlinkedModelSerializer):
@@ -63,7 +63,7 @@ class SongSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Song
-        fields = ('uri', 'name_song', 'artist', 'album')
+        fields = ('uri', 'name_song', 'artist', 'album','user')
 
 
 class PlaylistSerializer(HyperlinkedModelSerializer):
