@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
     url(r'^accounts/login/$', login, name='login'),
+    url(r'^accounts/logout/$', logout, name='logout'),
     # url(r'^register', views.register, name="register"),
     # url(r'^register', Register.as_view(), name='register'),
     url(r'^contact', views.contact, name="contact"),
