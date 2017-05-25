@@ -8,7 +8,7 @@ from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
-from django.core.exceptions import PermissionDenied, permissions
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
