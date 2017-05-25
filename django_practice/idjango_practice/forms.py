@@ -3,6 +3,7 @@ from django.forms import ModelForm
 # from registration.forms import RegistrationForm
 from .models import Artist, Song, Album, Playlist, OwnUser
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # from django.contrib.auth.models import User  # , UserModel
 # from django.contrib.auth.forms import UserCreationForm
@@ -11,8 +12,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class RegisterForm(UserCreationForm):
-    # __metaclass__ = classmaker()
     class Meta:
+<<<<<<< HEAD
         
         email = forms.EmailField(required=True)
         first_name = forms.CharField(required=False)
@@ -20,11 +21,24 @@ class RegisterForm(UserCreationForm):
 
         model = OwnUser
         fields = ()
+=======
+        model = User
+        fields = [
+            'username'
+        ]
+        labels = {
+            # 'first_name': 'First name',
+            # 'last_name': 'Last name',
+            # 'email': 'Email',
+            'username': 'User name'
+        }
+>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
         exclude = ("id_user", "user_id")
 
 
 class LoginForm(forms.Form):
-    pass
+    email = forms.EmailField()
+    password = forms.password = forms.CharField(widget=forms.PasswordInput)
 
 
 class ContactForm(forms.Form):

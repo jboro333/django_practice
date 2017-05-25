@@ -1,0 +1,17 @@
+
+Tareas:
+
+- url's generales
+/django_practice/urls.py
+
+- url's especificas
+/idjango_practice/urls.py
+
+- añadir html detail de cada objeto
+    playlist_detail.html
+    song_detail.html
+    album_detail.html
+
+Errores:
+
+- cargar vista de login

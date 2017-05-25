@@ -3,23 +3,31 @@ from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
+<<<<<<< HEAD
 from  serializers  import *
 
+=======
+from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
+from serializers import PlaylistSerializer
+from django.contrib.auth.models import User
+>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth import login
+from django.contrib.auth.models import User
+from rest_framework import permissions, generics
+# from django.contrib.auth import login
 
-from  rest_framework  import  generics
-from  rest_framework.decorators  import  api_view
-from  rest_framework.response  import  Response
-from  rest_framework.reverse  import  reverse
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 from rest_framework import permissions, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -34,28 +42,56 @@ def home(request):
     return render(request, "home.html", {})
 
 
+"""
+class Register(CreateView):
+    model = User
+    templae_name = 'templates/register.html'
+    form_class = RegisterForm
+    success_url = reverse_lazy('')
+
+
 def register(request):
-    form = RegisterForm
+    form = RegisterForm(request.POST)
+    if form.is_valid():
+        form_data = form.cleaned_data
+        obj = User()
+        obj.email = form_data.get("email")
+        obj.password = form_data.get("password")
+        obj.save()
     context = {
         "register_form": form
     }
     return render(request, "register.html", context)
+"""
 
 
-class Login(FormView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-    success_url = reverse_lazy("personas:bienvenida")
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            form_data = form.cleaned_data  # obtenemos la info del formulario
+            obj = User()
+            obj.name = form_data.get("name")
+            obj.sport_type = form_data.get("sport_type")
+            # obj.date = date.today()
+            # si el usuario esta registrado:
+            # else:
+            obj.user = request.user.id
+            obj.save()
+    else:
+        form = LoginForm()
+    context = {
+        "sport_session_form": form,
+    }
+    return render(request, "login.html", context)
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return super(Login, self).dispatch(request, *args, **kwargs)
 
-    def form_valid(self, form):
-        login(self.request, form.get_user())
-        return super(Login, self).form_valid(form)
+def login2(request):
+    form = LoginForm
+    context = {
+        "login_form": form
+    }
+    return render(request, "login.html", context)
 
 
 class CheckIsOwnerMixin(object):
@@ -100,10 +136,9 @@ class SongDetail(DetailView):
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
         return context
-    """
+
     def song_review(request, pk):
         artist = get_object
-    """
 
 
 class SongCreate(CreateView):
@@ -153,7 +188,8 @@ class AlbumCreate(CreateView):
         form.instance.user = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
-#API views
+# API views
+
 
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
@@ -165,11 +201,13 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
         return obj.user == request.user
 
+
 class APIArtistList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly,)
@@ -177,11 +215,13 @@ class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
+
 class APISongList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
+
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly,)
@@ -189,11 +229,13 @@ class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+
 class APIPlaylistList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+
 
 class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly,)
@@ -201,11 +243,13 @@ class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
+
 class APIAlbumList(generics.ListCreateAPIView):
         permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer
+
 
 class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
         permission_classes = (IsOwnerOrReadOnly,)
