@@ -8,7 +8,7 @@ from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, permissions
 from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -33,6 +33,7 @@ def home(request):
     return render(request, "home.html", {})
 
 
+"""
 class Register(CreateView):
     model = User
     templae_name = 'templates/register.html'
@@ -40,7 +41,6 @@ class Register(CreateView):
     success_url = reverse_lazy('')
 
 
-"""
 def register(request):
     form = RegisterForm(request.POST)
     if form.is_valid():
@@ -55,26 +55,29 @@ def register(request):
     return render(request, "register.html", context)
 """
 
-"""
+
 def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             form_data = form.cleaned_data  # obtenemos la info del formulario
-            obj = SportSession()
+            obj = User()
             obj.name = form_data.get("name")
             obj.sport_type = form_data.get("sport_type")
-            obj.date = date.today()
+            # obj.date = date.today()
             # si el usuario esta registrado:
             # else:
             obj.user = request.user.id
             obj.save()
     else:
-        form = SportSessionForm()
+        form = LoginForm()
     context = {
         "sport_session_form": form,
     }
     return render(request, "login.html", context)
+
+
+def login2(request):
     form = LoginForm
     context = {
         "login_form": form
@@ -88,7 +91,6 @@ class CheckIsOwnerMixin(object):
         if not obj.user == self.request.user:
             raise PermissionDenied
         return obj
-"""
 
 
 def contact(request):
@@ -125,10 +127,9 @@ class SongDetail(DetailView):
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
         return context
-    """
+
     def song_review(request, pk):
         artist = get_object
-    """
 
 
 class SongCreate(CreateView):
@@ -205,11 +206,13 @@ class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
+
 class APISongList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
+
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly,)
@@ -217,11 +220,13 @@ class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+
 class APIPlaylistList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+
 
 class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly,)
@@ -229,11 +234,13 @@ class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
+
 class APIAlbumList(generics.ListCreateAPIView):
         permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer
+
 
 class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
         permission_classes = (IsOwnerOrReadOnly,)
