@@ -16,6 +16,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
+from rest_framework import permissions, generics
 # from django.contrib.auth import login
 
 from rest_framework import generics

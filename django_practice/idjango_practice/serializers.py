@@ -9,8 +9,8 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
     uri = HyperlinkedIdentityField(view_name='TuMusica:artist-detail')
     album = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica:album-detail')
-    song = HyperlinkedRelatedField(many=True, read_only=True,view_name='TuMusica_song-detail')
-    playlist_set = HyperlinkedRelatedField(many=True, read_only=True,view_name='TuMusica:playlist-detail')
+    song = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica_song-detail')
+    playlist_set = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica:playlist-detail')
     user = CharField(read_only=True)
 
     class Meta:
@@ -21,7 +21,7 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 class AlbumSerializer(HyperlinkedModelSerializer):
     uri = HyperlinkedIdentityField(view_name='TuMusica:album-detail')
     artist = HyperlinkedRelatedField(view_name='TuMusica:artist-detail', read_only=True)
-    songs = HyperlinkedRelatedField(many=True, read_only=True,view_name='TuMusica_song-detail')
+    songs = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica_song-detail')
     user = CharField(read_only=True)
 
     class Meta:
@@ -39,6 +39,7 @@ class SongSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Song
         fields = ('uri', 'name_song', 'artist', 'album')
+
 
 class PlaylistSerializer(HyperlinkedModelSerializer):
 
