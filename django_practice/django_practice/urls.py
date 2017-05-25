@@ -34,7 +34,9 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login")
-#urlpatterns += [
+]
+
+urlpatterns += [
         # RESTful API
     url(r'^api/artist/$',
             APIArtistList.as_view(), name='artist-list'),
@@ -52,5 +54,4 @@ urlpatterns = [
             APIAlbumList.as_view(), name='album-list'),
     url(r'^api/song/(?P<pk>\d+)/$',
             APIAlbumDetail.as_view(), name='album-detail'),
-    #]
 ]

@@ -1,8 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib.auth import login_required
 
 from rest_framework.urlpatterns import format_suffix_patters
-
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from model import Playlist, Song, Album, Artist
@@ -13,7 +12,8 @@ from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
     APIArtistList, APIArtistDetail, APIAlbumList, APIAlbumDetail
 
 urlpatterns = [
-    url(r'^register', Register.as_view(), name='register')
+    url(r'^register', Register.as_view(), name='register'),
+    url(r'^accounts/', include('registration.backends.default.urls'))
 ]
 
 urlpatterns += [
