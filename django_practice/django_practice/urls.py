@@ -44,20 +44,14 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # List all artists: /Aplicacio/teams/
-    url(r'^artist/create/$', ArtistCreate.as_view(), name='artist'),
-    url(r'^song/create', SongCreate.as_view(), name="song"),
-    url(r'^album/create$', AlbumCreate.as_view(), name="album"),
-    url(r'^playlist/create', PlaylistCreate.as_view(), name="playlist"),
+    url(r'^artist', ArtistCreate.as_view(), name='artist'),
+    url(r'^song', SongCreate.as_view(), name="song"),
+    url(r'^album', AlbumCreate.as_view(), name="album"),
+    url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login"),
     # url(r'^accounts/', include('registration.backends.default.urls'))
 
-    url(r'^artists/$',
-        ListView.as_view(
-            queryset=Artist.objects.all,
-            context_object_name='artist_list',
-            template_name='music/artist_list.html'),
-        name='team_list'),
 ]
 
 urlpatterns += [

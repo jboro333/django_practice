@@ -134,34 +134,6 @@ class SongCreate(LoginRequiredMixin, CreateView):
         return super(SongCreate, self).form_valid(form)
 
 
-"""
-# clase vista
-class SongCreate(LoginRequiredMixin, CreateView):
-    form = SongForm
-    # model = Song
-    # template_name = 'post_form.html'
-    # success_url = '../home'
-
-    def form_valid(form):
-        instance = form.save(commit=False)
-        # print form.cleaned_data.get("title")
-        instance.save()
-
-        context = {
-            "form": form,
-        }
-        return redirect(CreateView, "song.html", context)
-
-
-    # funcion vista
-    def form_valid(self, form):
-        # self.object = form.save()
-        form.instance.user = self.request.user
-        super(SongCreate, self).form_valid(form)
-        return redirect('../home')
-"""
-
-
 class ArtistDetail(DetailView):
     model = Artist
     template_name = 'idjango_practice/artist_detail.html'
@@ -171,15 +143,14 @@ class ArtistDetail(DetailView):
         return context
 
 
-class ArtistCreate(LoginRequiredMixin, CreateView):
+class ArtistCreate(CreateView):
     model = Artist
     template_name = 'form.html'
     form_class = ArtistForm
     success_url = '/home'
 
     def form_valid(self, form):
-        # return super(ArtistCreate, self).form_valid(form)
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         return super(ArtistCreate, self).form_valid(form)
 
 
