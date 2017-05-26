@@ -8,6 +8,10 @@ from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer
 from serializers import AlbumSerializer
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.views.generic import View
@@ -32,7 +36,6 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
-#from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django import forms
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -214,14 +217,14 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
-    #def get_context(self, **kwargs):
-    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
-    #    return context
+    def get_context(self, **kwargs):
+        context = super(ArtistDetail, self).get_context_data(**kwargs)
+        return context
 
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -246,7 +249,11 @@ class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIPlaylistList(generics.ListCreateAPIView):
+<<<<<<< HEAD
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+=======
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+>>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
@@ -260,7 +267,11 @@ class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIAlbumList(generics.ListCreateAPIView):
+<<<<<<< HEAD
     #    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+=======
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+>>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer

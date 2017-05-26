@@ -18,7 +18,7 @@ class Artist(models.Model):
     # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
-            return self.name_artist
+        return self.name_artist
 
     def __str__(self):  # python 3
         return self.name_artist
@@ -33,14 +33,13 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, default=-1)
 
     def __unicode__(self):
-            return self.name_album
+        return self.name_album
 
     def __str__(self):  # python 3
         return self.name_album
 
     def get_absolute_url(self):
-        return reverse('TuMusica:album-detail', kwargs={'pkr': self.artist.pk, ' \
-        pk': self.pk})
+        return reverse('TuMusica:album-detail', kwargs={'pk': self.pk})
 
 
 class Song(models.Model):
@@ -56,8 +55,7 @@ class Song(models.Model):
         return self.name_song
 
     def get_absolute_url(self):
-        return reverse('TuMusica:song-detail', kwargs={'pkr': self.artist.pk, ' \
-        pk': self.pk})
+        return reverse('TuMusica:song-detail', kwargs={'pk': self.pk})
 
 
 class Playlist(models.Model):

@@ -48,7 +48,24 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
+"""
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':
+    ('rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',),
+        'PAGINATE_BY':  10,
+        'DEFAULT_PARSER_CLASSES':  (
+                'rest_framework.parsers.FormParser',
+                'rest_framework.parsers.JSONParser',
+                'rest_framework.parsers.FormParser',
+                'rest_framework.parsers.MultiPartParser'
+        ),
+        'DEFAULT_RENDERER_CLASSES':  (
+                'rest_framework.renderers.BrowsableAPIRenderer',
+                'rest_framework.renderers.JSONRenderer',
+        ),
+}
+"""
 LOGIN_URL = '/login'
 
 MIDDLEWARE_CLASSES = [

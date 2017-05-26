@@ -44,7 +44,7 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     url(r'^artist', ArtistCreate.as_view(), name="artist"),
-    url(r'^song', SongCreate.as_view(), name="song"),
+    url(r'^song', views.SongCreate, name="song"),
     url(r'^album', AlbumCreate.as_view(), name="album"),
     url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
@@ -74,6 +74,7 @@ urlpatterns += [
         APIAlbumDetail.as_view(), name='album-detail'),
     # ]
 ]
+
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=[
 'api', 'json', 'xml'])
