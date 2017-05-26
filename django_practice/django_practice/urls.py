@@ -74,15 +74,15 @@ urlpatterns = [
         name='song_list'),
     url(r'^albums/$',
         ListView.as_view(
-            queryset=Song.objects.all,
-            context_object_name='song_list',
-            template_name='song_list.html'),
+            queryset=Album.objects.all,
+            context_object_name='album_list',
+            template_name='album_list.html'),
         name='album_list'),
-    url(r'^playlist/$',
+    url(r'^playlists/$',
         ListView.as_view(
             queryset=Playlist.objects.all,
-            context_object_name='song_list',
-            template_name='song_list.html'),
+            context_object_name='playlist_list',
+            template_name='playlist_list.html'),
         name='playlist_list'),
 ]
 
