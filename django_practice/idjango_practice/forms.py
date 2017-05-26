@@ -13,15 +13,12 @@ from django.contrib.auth.models import User
 
 class RegisterForm(UserCreationForm):
     class Meta:
-#<<<<<<< HEAD
-
         email = forms.EmailField(required=True)
         first_name = forms.CharField(required=False)
         last_name = forms.CharField(required=False)
 
         model = OwnUser
         fields = ()
-#=======
         model = User
         fields = [
             'username'
@@ -32,7 +29,6 @@ class RegisterForm(UserCreationForm):
             # 'email': 'Email',
             'username': 'User name'
         }
-#>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
         exclude = ("id_user", "user_id")
 
 
@@ -47,25 +43,28 @@ class ContactForm(forms.Form):
     topic = forms.CharField(max_length=500)
 
 
-class PlaylistForm(ModelForm):
+class PlaylistForm(forms.ModelForm):
     class Meta:
         model = Playlist
-        exclude = ()
+        fields = ['name_playlist', 'user', 'songs']
 
 
-class AlbumForm(ModelForm):
+class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        exclude = ()
+        fields = ['name_album', 'artist']
 
 
-class SongForm(ModelForm):
+class SongForm(forms.ModelForm):
     class Meta:
         model = Song
-        exclude = ()
+        fields = ['name_song', 'artist', 'album']
 
 
-class ArtistForm(ModelForm):
+class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        exclude = ()
+        fields = ['name_artist']
+
+    def guardar(self):
+        self.cleaned_data

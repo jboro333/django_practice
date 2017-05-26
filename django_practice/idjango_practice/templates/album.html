@@ -28,9 +28,10 @@
       </header>
     <section>
       <h3>Create new Album</h3
-      <form metho="POST" action="">
+      <form method="POST" action="">
           {% csrf_token%}
-          {{ album_registration_form.as_p }}
+          {{ form.as_p }}
+          <input type="submit" value="Save song"/>
       </form>
     </section>
     <footer>

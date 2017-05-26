@@ -3,14 +3,10 @@ from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
-#<<<<<<< HEAD
 from  serializers  import *
-
-#=======
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
-#>>>>>>> 37f2db7cf5637774c5ae83b0314b58d11ef10fd7
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.core.exceptions import PermissionDenied
@@ -23,7 +19,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from rest_framework import permissions, generics
 # from django.contrib.auth import login
-
+from datetime import date
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -31,7 +27,7 @@ from rest_framework.reverse import reverse
 
 from rest_framework import permissions, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
+from django import forms
 # from django.template import RequestContext
 # from django.views.generic import DetailView
 # from django.core import views as core_views
@@ -40,66 +36,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Create your views here.
 def home(request):
     return render(request, "home.html", {})
-
-
-"""
-class Register(CreateView):
-    model = User
-    templae_name = 'templates/register.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('')
-
-
-def register(request):
-    form = RegisterForm(request.POST)
-    if form.is_valid():
-        form_data = form.cleaned_data
-        obj = User()
-        obj.email = form_data.get("email")
-        obj.password = form_data.get("password")
-        obj.save()
-    context = {
-        "register_form": form
-    }
-    return render(request, "register.html", context)
-"""
-
-
-def login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form_data = form.cleaned_data  # obtenemos la info del formulario
-            obj = User()
-            obj.name = form_data.get("name")
-            obj.sport_type = form_data.get("sport_type")
-            # obj.date = date.today()
-            # si el usuario esta registrado:
-            # else:
-            obj.user = request.user.id
-            obj.save()
-    else:
-        form = LoginForm()
-    context = {
-        "sport_session_form": form,
-    }
-    return render(request, "login.html", context)
-
-
-def login2(request):
-    form = LoginForm
-    context = {
-        "login_form": form
-    }
-    return render(request, "login.html", context)
-
-
-class CheckIsOwnerMixin(object):
-    def get_object(self, *args, **kwargs):
-        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
-        if not obj.user == self.request.user:
-            raise PermissionDenied
-        return obj
 
 
 def contact(request):
@@ -121,11 +57,12 @@ class PlaylistDetail(DetailView):
 
 class PlaylistCreate(CreateView):
     model = Playlist
-    template_name = 'yourmusic/playlist_create.html'
+    template_name = 'playlist.html'
     form_class = PlaylistForm
+    success_url = '/playlist_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         return super(PlaylistCreate, self).form_valid(form)
 
 
@@ -138,16 +75,20 @@ class SongDetail(DetailView):
         return context
 
     def song_review(request, pk):
-        artist = get_object
+        # artist = get_object
+        pass
 
 
+# clase vista
 class SongCreate(CreateView):
     model = Song
-    template_name = 'yourmusic/playlist_create.html'
+    template_name = 'song.html'
     form_class = SongForm
+    success_url = '/song_created'
 
+    # funcion vista
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # self.object = form.save()
         return super(SongCreate, self).form_valid(form)
 
 
@@ -162,17 +103,19 @@ class ArtistDetail(DetailView):
 
 class ArtistCreate(CreateView):
     model = Artist
-    template_name = 'yourmusic/artist_create.html'
+    template_name = 'artist.html'
     form_class = ArtistForm
+    success_url = '/artist_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(ArtistCreate, self).form_valid(form)
+        # return super(ArtistCreate, self).form_valid(form)
+        result = super(ArtistCreate, self).form_valid(form)
+        return result
 
 
 class AlbumDetail(DetailView):
     model = Album
-    template_name = 'yourmusic/album_detail.html'
+    template_name = 'yourmusic/album.html'
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
@@ -181,13 +124,30 @@ class AlbumDetail(DetailView):
 
 class AlbumCreate(CreateView):
     model = Album
-    template_name = 'yourmusic/album_create.html'
+    template_name = 'album.html'
     form_class = AlbumForm
+    success_url = '/album_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
+
+"""
+def artistCreate(request):
+    form = ArtistForm(request.POST)
+    form_data = form.cleaned_data()  # obtenemos la info del formulario
+    obj = Artist()
+    obj.name_artist = form_data.get("name_artist")
+    # obj.sport_type = form_data.get("sport_type")
+    obj.date = date.today()
+    # obj.user = request.user.id
+    obj.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'artist.html', context)
+"""
 # API views
 
 

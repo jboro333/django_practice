@@ -23,17 +23,14 @@ from idjango_practice.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
-    url(r'^accounts/login/$', login, name='login'),
-    url(r'^accounts/logout/$', logout, name='logout'),
-    # url(r'^register', views.register, name="register"),
-    # url(r'^register', Register.as_view(), name='register'),
     url(r'^contact', views.contact, name="contact"),
-    # url(r'^artist', ArtistDetail, name="artist"),
-    # url(r'^song', views.song, name="song"),
-    # url(r'^album', views.album, name="album"),
-    # url(r'^playlist', views.playlist, name="playlist"),
+    url(r'^artist', ArtistCreate.as_view(), name="artist"),
+    url(r'^song', SongCreate.as_view(), name="song"),
+    url(r'^album', AlbumCreate.as_view(), name="album"),
+    url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # url(r'^login', views.login, name="login")
+    # url(r'^login', views.login, name="login"),
+    url(r'^accounts/', include('registration.backends.default.urls'))
 ]
 
 urlpatterns += [
