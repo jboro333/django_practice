@@ -1,0 +1,8 @@
+<h1>List of artist</h1>
+<ul>
+  {% for item in artist_list %}
+      <li>{{ item.name_artist }}</li>
+    {% empty %}
+      <li>No articles yet.</li>
+    {% endfor %}
+</ul>
