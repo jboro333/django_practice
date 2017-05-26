@@ -2,7 +2,7 @@
 from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from django_practice import settings
-from .forms import ContactForm, UserForm, UserLoginForm
+from .forms import ContactForm, UserForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
@@ -233,8 +233,6 @@ class CheckIsOwnerMixin(object):
         return obj
 
 
-=======
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 def contact(request):
     form = ContactForm
     context = {
@@ -264,11 +262,7 @@ class PlaylistDetail(DetailView):
 
 class PlaylistCreate(CreateView):
     model = Playlist
-<<<<<<< HEAD
-    template_name = 'youridjango_practice/playlist_create.html'
-=======
     template_name = 'playlist.html'
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = PlaylistForm
     success_url = '/playlist_created'
 
@@ -284,25 +278,12 @@ class SongDetail(DetailView):
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
         return context
-        """
-    def song_review(request, pk):
-<<<<<<< HEAD
-        artist = get_object
-        """
-=======
-        # artist = get_object
-        pass
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 
 
 # clase vista
 class SongCreate(CreateView):
     model = Song
-<<<<<<< HEAD
-    template_name = 'idjango_practice/playlist_create.html'
-=======
     template_name = 'song.html'
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = SongForm
     success_url = '/song_created'
 
@@ -323,11 +304,7 @@ class ArtistDetail(DetailView):
 
 class ArtistCreate(CreateView):
     model = Artist
-<<<<<<< HEAD
-    template_name = 'idjango_practice/artist_create.html'
-=======
     template_name = 'artist.html'
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = ArtistForm
     success_url = '/artist_created'
 
@@ -339,11 +316,7 @@ class ArtistCreate(CreateView):
 
 class AlbumDetail(DetailView):
     model = Album
-<<<<<<< HEAD
-    template_name = 'idjango_practice/album_detail.html'
-=======
     template_name = 'yourmusic/album.html'
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
@@ -352,11 +325,7 @@ class AlbumDetail(DetailView):
 
 class AlbumCreate(CreateView):
     model = Album
-<<<<<<< HEAD
-    template_name = 'idjango_practice/album_create.html'
-=======
     template_name = 'album.html'
->>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = AlbumForm
     success_url = '/album_created'
 

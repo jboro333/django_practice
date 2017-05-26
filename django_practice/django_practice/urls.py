@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login"),
-    url(r'^accounts/', include('registration.backends.default.urls'))
+    # url(r'^accounts/', include('registration.backends.default.urls'))
 ]
 
 urlpatterns += [
