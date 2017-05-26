@@ -124,15 +124,15 @@ class SongDetail(DetailView):
         return context
 
 
-class SongCreate(CreateView):
+class SongCreate(LoginRequiredMixin, CreateView):
     model = Song
     template_name = 'song.html'
-    form = SongForm
+    form_class = SongForm
 
     def form_valid(self, form):
         # return super(ArtistCreate, self).form_valid(form)
         form.instance.user = self.request.user
-        return super(ArtistCreate, self).form_valid(form)
+        return super(SongCreate, self).form_valid(form)
 
 
 """
