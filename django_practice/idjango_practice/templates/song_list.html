@@ -1,0 +1,8 @@
+<h1>List of songs</h1>
+<ul>
+{% for item in song_list %}
+    <li>{{ item.name_song }} - {{ item.album }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>

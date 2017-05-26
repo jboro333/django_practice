@@ -20,7 +20,7 @@ from idjango_practice import views
 from django.views.generic import DetailView, ListView, UpdateView
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from django.views.generic import View,RedirectView
+from django.views.generic import View, RedirectView
 from idjango_practice.views import *
 from idjango_practice.forms import *
 from idjango_practice.models import *
@@ -44,10 +44,14 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # List all artists: /Aplicacio/teams/
-    url(r'^artist/create/$', ArtistCreate.as_view(), name='artist'),
-    url(r'^song/create', SongCreate.as_view(), name="song"),
-    url(r'^album/create$', AlbumCreate.as_view(), name="album"),
-    url(r'^playlist/create', PlaylistCreate.as_view(), name="playlist"),
+    # url(r'^artist/list/$', ArtistList.as_view(), name='artist_list'),
+    url(r'^artist/create/$', ArtistCreate.as_view(), name='artist_create'),
+    # url(r'^song/list/$', SongList.as_view(), name='song_list'),
+    url(r'^song/create', SongCreate.as_view(), name="song_create"),
+    # url(r'^album/list$', AlbumList.as_view(), name="album_list"),
+    url(r'^album/create$', AlbumCreate.as_view(), name="album_create"),
+    # url(r'^playlist/list$', PlaylistList.as_view(), name="playlist_list"),
+    url(r'^playlist/create', PlaylistCreate.as_view(), name="playlist_create"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login"),
     # url(r'^accounts/', include('registration.backends.default.urls'))
@@ -56,8 +60,26 @@ urlpatterns = [
         ListView.as_view(
             queryset=Artist.objects.all,
             context_object_name='artist_list',
-            template_name='music/artist_list.html'),
-        name='team_list'),
+            template_name='artist_list.html'),
+        name='artist_list'),
+    url(r'^songs/$',
+        ListView.as_view(
+            queryset=Song.objects.all,
+            context_object_name='song_list',
+            template_name='song_list.html'),
+        name='song_list'),
+    url(r'^albums/$',
+        ListView.as_view(
+            queryset=Song.objects.all,
+            context_object_name='song_list',
+            template_name='song_list.html'),
+        name='album_list'),
+    url(r'^playlist/$',
+        ListView.as_view(
+            queryset=Playlist.objects.all,
+            context_object_name='song_list',
+            template_name='song_list.html'),
+        name='playlist_list'),
 ]
 
 urlpatterns += [

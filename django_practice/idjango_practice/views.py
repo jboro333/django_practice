@@ -17,6 +17,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
@@ -102,6 +103,16 @@ class PlaylistDetail(DetailView):
         return context
 
 
+class PlaylistList(ListView):
+    model = Playlist
+    template_name = 'playlist_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PlaylistList, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
 class PlaylistCreate(LoginRequiredMixin, CreateView):
     model = Playlist
     template_name = 'form.html'
@@ -119,6 +130,16 @@ class SongDetail(DetailView):
 
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
+        return context
+
+
+class SongList(ListView):
+    model = Song
+    template_name = 'song_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SongList, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
         return context
 
 
@@ -183,12 +204,32 @@ class ArtistCreate(LoginRequiredMixin, CreateView):
         return super(ArtistCreate, self).form_valid(form)
 
 
+class ArtistList(ListView):
+    model = Artist
+    template_name = 'artist_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ArtistList, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
 class AlbumDetail(DetailView):
     model = Album
     template_name = 'yourmusic/album.html'
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
+        return context
+
+
+class AlbumList(ListView):
+    model = Album
+    template_name = 'album_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AlbumList, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
         return context
 
 

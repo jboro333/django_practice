@@ -14,7 +14,7 @@ class Artist(models.Model):
     id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
     url = models.URLField()
-    user = models.ForeignKey(User, default=1)
+    # user = models.ForeignKey(User, default=-1)
     # albums = models.ForeignKey(Album)
 
     def __unicode__(self):

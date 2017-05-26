@@ -29,8 +29,7 @@ class PlaylistForm(ModelForm):
 class AlbumForm(ModelForm):
     class Meta:
         model = Album
-        fields = ['name_album']
-        # fields = ['name_album', 'artist']
+        fields = ['name_album', 'artist']
 
 
 class SongForm(ModelForm):
@@ -42,4 +41,4 @@ class SongForm(ModelForm):
 class ArtistForm(ModelForm):
     class Meta:
         model = Artist
-        fields = ['name_artist', 'user']
+        fields = ['name_artist']
