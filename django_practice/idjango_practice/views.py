@@ -8,10 +8,7 @@ from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer
 from serializers import AlbumSerializer
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.views.generic import View
@@ -217,7 +214,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
@@ -249,11 +246,11 @@ class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIPlaylistList(generics.ListCreateAPIView):
-<<<<<<< HEAD
+
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
-=======
+
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
->>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
+
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
@@ -267,11 +264,9 @@ class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIAlbumList(generics.ListCreateAPIView):
-<<<<<<< HEAD
+
     #    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
-=======
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
->>>>>>> 35fef285b457f5db89424fcef7771e26f38ee5b6
+
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer

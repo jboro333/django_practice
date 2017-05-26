@@ -1,0 +1,20 @@
+{% extends "artist.html" %}
+
+    {%  block  content  %}
+        <h1>
+            Artist
+            {%  if  user.is_authenticated  %}
+                (<a  href="{%  url  'TuMusica:artist-detail'  %}">add</a>)
+            {%  endif  %}
+        </h1>
+        <ul>
+            {%  for  artist %}
+                <li>
+                    <a  href="{%  url  'TuMusica:artist-detail-detail'  artist.id_artist  %}"> {{  artist.name_artist  }}
+                    </a>
+                </li>
+            {%  empty  %}
+                <li>Sorry,  no  artist  registered  yet.</li>
+            {%  endfor  %}
+        </ul>
+{% endblock %}
