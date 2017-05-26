@@ -13,7 +13,7 @@ class OwnUser(models.Model):
 class Artist(models.Model):
     id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
-    # albums = models.ManyToManyField(Album)
+    # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
             return self.name_artist

@@ -10,7 +10,8 @@ from . import views
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
-    url(r'^login/', login_view, name="login"),
+    url(r'^$', views.home, name="home"),
+    url(r'^login/$', views.Login),
     # url(r'^register', Register.as_view(), name='register'),
     # url(r'^accounts/', include('registration.backends.default.urls'))
 ]
