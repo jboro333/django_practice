@@ -4,8 +4,9 @@ from models import Song, Playlist, Artist, Album
 from django_practice import settings
 from .forms import ContactForm, UserForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
-from serializers import *
-from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer, AlbumSerializer
+
+from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer
+from serializers import AlbumSerializer
 
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
@@ -14,6 +15,7 @@ from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.views.generic import View
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -62,170 +64,13 @@ def Login(request):
 def Logout(request):
     logout(request)
     # SI VOLEM QUE TORNI A LA PAGINA DE LOGIN ALM FER LOGOUT:
-    return HttpResponseRedirect(settings.LOGIN_URL)
+    # return HttpResponseRedirect(settings.LOGIN_URL)
     # SI VOLEM QUE TORNI A HOME AL FER LOGOUT:
-    # return redirect('../home')
+    return redirect('../home')
 
 
 def home(request):
     return render(request, "home.html", {})
-
-
-"""
-def login_view(request):
-    title = "Login"
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned.data.get("username")
-        password = form.cleaned.data.get('password')
-
-    return render(request, "form.html", {"form": form, "title": title})
-
-
-def register_view(request):
-    return render(request, "form.html", {})
-
-
-def logout_view(request):
-    return render(request, "form.html", {})
-"""
-
-"""
-class UserFormView(object):
-    form_class = UserForm
-    template_name = 'idjango_practice/register.html'
-
-    # display a blank form
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    # process
-    def post(self, request):
-        form = self.form_class(request.POST)
-        # quan cliquin a submit, aqui es guardara
-
-        if form.is_Valid():
-
-            user = form.save(commit=False)  # x no guardarho encara
-
-            # parsejar xk ho agafi be
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user.set_password(password)  # cambiar la pw del usuari
-            user.save()
-
-            # si les credencials OK , retorna user
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-
-                if user.is_active:
-                    login(request, user)
-                    return redirect('views.home')
-        return render(request, self.template_name, {'form': form})
-
-
-def logout_user(request):
-    logout(request)
-    form = UserForm(request.POST or None)
-    context = {
-        "form": form,
-    }
-    return render(request, 'idjango_practice/login.html', context)
-
-
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'idjango_practice/home.html', {'albums': albums})
-            else:
-                return render(request, 'idjango_practice/login.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'idjango_practice/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'idjango_practice/login.html')
-
-
-def register(request):
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'home.html', {'albums': albums})
-    context = {
-        "form": form,
-    }
-    return render(request, 'register.html', context)
-
-
-
-"""
-
-
-"""
-class Register(CreateView):
-    model = User
-    templae_name = 'templates/register.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('')
-
-
-def register(request):
-    form = RegisterForm(request.POST)
-    if form.is_valid():
-        form_data = form.cleaned_data
-        obj = User()
-        obj.email = form_data.get("email")
-        obj.password = form_data.get("password")
-        obj.save()
-    context = {
-        "register_form": form
-    }
-    return render(request, "register.html", context
-
-
-def login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form_data = form.cleaned_data  # obtenemos la info del formulario
-            obj = User()
-            obj.name = form_data.get("name")
-            obj.sport_type = form_data.get("sport_type")
-            # obj.date = date.today()
-            # si el usuario esta registrado:
-            # else:
-            obj.user = request.user.id
-            obj.save()
-    else:
-        form = LoginForm()
-    context = {
-        "sport_session_form": form,
-    }
-    return render(request, "login.html", context)
-
-
-def login2(request):
-    form = LoginForm
-    context = {
-        "login_form": form
-    }
-    return render(request, "login.html", context)
-"""
 
 
 class CheckIsOwnerMixin(object):
@@ -236,22 +81,18 @@ class CheckIsOwnerMixin(object):
         return obj
 
 
+class LoginRequiredMixin(object):
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
 def contact(request):
     form = ContactForm
     context = {
         "contact_form": form
     }
     return render(request, "contact.html", context)
-
-
-"""
-def register(request):
-    form = RegisterForm
-    context = {
-        "register_form": form
-    }
-    return render(request, "register.html", context)
-"""
 
 
 class PlaylistDetail(DetailView):
@@ -263,7 +104,7 @@ class PlaylistDetail(DetailView):
         return context
 
 
-class PlaylistCreate(CreateView):
+class PlaylistCreate(LoginRequiredMixin, CreateView):
     model = Playlist
     template_name = 'playlist.html'
     form_class = PlaylistForm
@@ -283,17 +124,43 @@ class SongDetail(DetailView):
         return context
 
 
-# clase vista
-class SongCreate(CreateView):
+class SongCreate(LoginRequiredMixin, CreateView):
     model = Song
     template_name = 'song.html'
     form_class = SongForm
-    success_url = '/song_created'
+
+    def form_valid(self, form):
+        # return super(ArtistCreate, self).form_valid(form)
+        form.instance.user = self.request.user
+        return super(SongCreate, self).form_valid(form)
+
+
+"""
+# clase vista
+class SongCreate(LoginRequiredMixin, CreateView):
+    form = SongForm
+    # model = Song
+    # template_name = 'post_form.html'
+    # success_url = '../home'
+
+    def form_valid(form):
+        instance = form.save(commit=False)
+        # print form.cleaned_data.get("title")
+        instance.save()
+
+        context = {
+            "form": form,
+        }
+        return redirect(CreateView, "song.html", context)
+
 
     # funcion vista
     def form_valid(self, form):
         # self.object = form.save()
-        return super(SongCreate, self).form_valid(form)
+        form.instance.user = self.request.user
+        super(SongCreate, self).form_valid(form)
+        return redirect('../home')
+"""
 
 
 class ArtistDetail(DetailView):
@@ -305,16 +172,15 @@ class ArtistDetail(DetailView):
         return context
 
 
-class ArtistCreate(CreateView):
+class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
     template_name = 'artist.html'
     form_class = ArtistForm
-    success_url = '/artist_created'
 
     def form_valid(self, form):
         # return super(ArtistCreate, self).form_valid(form)
-        result = super(ArtistCreate, self).form_valid(form)
-        return result
+        form.instance.user = self.request.user
+        return super(ArtistCreate, self).form_valid(form)
 
 
 class AlbumDetail(DetailView):
@@ -326,7 +192,7 @@ class AlbumDetail(DetailView):
         return context
 
 
-class AlbumCreate(CreateView):
+class AlbumCreate(LoginRequiredMixin, CreateView):
     model = Album
     template_name = 'album.html'
     form_class = AlbumForm
@@ -361,7 +227,7 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
@@ -379,7 +245,7 @@ class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APISongList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
@@ -393,7 +259,7 @@ class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIPlaylistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
@@ -407,7 +273,7 @@ class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APIAlbumList(generics.ListCreateAPIView):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer

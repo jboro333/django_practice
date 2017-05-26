@@ -13,7 +13,7 @@ class OwnUser(models.Model):
 class Artist(models.Model):
     # id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
-    # albums = models.ManyToManyField(Album)
+    # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
             return self.name_artist
@@ -58,6 +58,7 @@ class Song(models.Model):
         pk': self.pk})
 
 
+"""
 class Playlist(models.Model):
     # id_playlist = models.AutoField(primary_key=True)
     name_playlist = models.TextField(max_length=50)
@@ -72,3 +73,4 @@ class Playlist(models.Model):
 
     def get_absolute_url(self):
         return reverse('TuMusica:playlist-detail', kwargs={'pk': self.pk})
+"""
