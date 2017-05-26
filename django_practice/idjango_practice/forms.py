@@ -42,4 +42,4 @@ class SongForm(ModelForm):
 class ArtistForm(ModelForm):
     class Meta:
         model = Artist
-        fields = ['name_artist']
+        fields = ['name_artist', 'user']

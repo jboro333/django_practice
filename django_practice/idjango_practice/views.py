@@ -104,9 +104,9 @@ class PlaylistDetail(DetailView):
 
 class PlaylistCreate(LoginRequiredMixin, CreateView):
     model = Playlist
-    template_name = 'playlist.html'
+    template_name = 'form.html'
     form_class = PlaylistForm
-    success_url = '/playlist_created'
+    success_url = '/home'
 
     def form_valid(self, form):
         # form.instance.user = self.request.user
@@ -124,8 +124,9 @@ class SongDetail(DetailView):
 
 class SongCreate(LoginRequiredMixin, CreateView):
     model = Song
-    template_name = 'song.html'
+    template_name = 'form.html'
     form_class = SongForm
+    success_url = '/home'
 
     def form_valid(self, form):
         # return super(ArtistCreate, self).form_valid(form)
@@ -172,8 +173,9 @@ class ArtistDetail(DetailView):
 
 class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
-    template_name = 'artist.html'
+    template_name = 'form.html'
     form_class = ArtistForm
+    success_url = '/home'
 
     def form_valid(self, form):
         # return super(ArtistCreate, self).form_valid(form)
@@ -192,9 +194,9 @@ class AlbumDetail(DetailView):
 
 class AlbumCreate(LoginRequiredMixin, CreateView):
     model = Album
-    template_name = 'album.html'
+    template_name = 'form.html'
     form_class = AlbumForm
-    success_url = '/album_created'
+    success_url = '/home'
 
     def form_valid(self, form):
         # form.instance.user = self.request.user
