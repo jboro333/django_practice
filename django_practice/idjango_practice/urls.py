@@ -6,16 +6,15 @@ from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from model import Playlist, Song, Album, Artist
 from forms import SongForm, PlaylistForm, AlbumForm, ArtistForm
-from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
-    PlaylistDetail, PlaylistCreate, ArtistDetail, ArtistCreate, Register, \
-    APISongList, APISongDetail, APIPlaylistList, APIPlaylistDetail, \
-    APIArtistList, APIArtistDetail, APIAlbumList, APIAlbumDetail
+from . import views
+from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
-    url(r'^register', Register.as_view(), name='register'),
-    url(r'^accounts/', include('registration.backends.default.urls'))
+    url(r'^login/', login_view, name="login"),
+    # url(r'^register', Register.as_view(), name='register'),
+    # url(r'^accounts/', include('registration.backends.default.urls'))
 ]
-
+"""
 # urlpatterns += [
 # RESTful API
 #    url(r'^api/artist/$',
@@ -37,7 +36,7 @@ urlpatterns = [
 # ]
 
 
-"""
+
     url(r'^$',
         ListView.as_view(
             queryset=Song.objects.filter(date__lte=timezone.now()).order_by('-d
@@ -46,6 +45,7 @@ urlpatterns = [
             template_name='myrestaurants/restaurant_list.html'),
         name='restaurant_list')
 ]
+
 
 
 """

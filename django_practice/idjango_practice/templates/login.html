@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <title>Tu Música</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <!-- <img src="http... -->
-        <h1><a href="/">Tu Música</a></h1>
-        <nav>
-            <ul>
-                <li><a href="/register">Registro</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/contact">Contacto</a></li>
-            </ul>
-        </nav>
-        <nav>
-          <h3>Menu</h3
-            <ul>
-              <li><a href="/artist">Artists</a></li>
-              <li><a href="/album">Albums</a></li>
-              <li><a href="/song">Songs</a></li>
-          </ul>
-        </nav>
-    </header>
-    <section>
-      <article>
-        <h3>Access</h3
-        <form metho="POST" action="">
-                {% csrf_token%}
-                {{ login_form.as_p }}
-            </form>
-      </articles>
-    </section>
-    <footer>
-        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
-    </footer>
-</body>
+<form method="post" action=".?next={{ redirect_to }}"> {% csrf_token %}
+    <input type="text" name="username" placeholder="Username"/>
+    <input type="password" name="password" placeholder="Password"/>
+
+    <input type="submit" value="Login"/>
+</form>
