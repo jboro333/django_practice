@@ -96,7 +96,7 @@ def contact(request):
 
 class PlaylistDetail(DetailView):
     model = Playlist
-    template_name = 'youridjango_practice/playlist_detail.html'
+    template_name = 'playlist_detail.html'
 
     def get_context(self, **kwargs):
         context = super(PlaylistDetail, self).get_context_data(**kwargs)
@@ -126,7 +126,7 @@ class PlaylistCreate(LoginRequiredMixin, CreateView):
 
 class SongDetail(DetailView):
     model = Song
-    template_name = 'idjango_practice/song_detail.html'
+    template_name = 'song_detail.html'
 
     def get_context(self, **kwargs):
         context = super(SongDetail, self).get_context_data(**kwargs)
@@ -157,7 +157,7 @@ class SongCreate(LoginRequiredMixin, CreateView):
 
 class ArtistDetail(DetailView):
     model = Artist
-    template_name = 'idjango_practice/artist_detail.html'
+    template_name = 'artist_detail.html'
 
     def get_context(self, **kwargs):
         context = super(ArtistDetail, self).get_context_data(**kwargs)
@@ -187,7 +187,7 @@ class ArtistList(ListView):
 
 class AlbumDetail(DetailView):
     model = Album
-    template_name = 'yourmusic/album.html'
+    template_name = 'album.html'
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
