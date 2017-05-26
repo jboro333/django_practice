@@ -29,6 +29,8 @@
 						</ul>
 
         </nav>
+			</header>
+		<section>
         <nav>
           <h3>Menú</h3
             <ul>
@@ -37,11 +39,24 @@
               <li><a href="/album/create">Create Albums</a></li>
               <li><a href="/song/create">Create Songs</a></li>
               <li><a href="/playlist/create">Create Playlist</a></li>
+							{% else %}
+							<li><a href="/artists/">See Artists</a></li>
+              <li><a href="/albums/">See Albums</a></li>
+              <li><a href="/songs/">See Songs</a></li>
+              <li><a href="/playlists/">See Playlist</a></li>
 							{% endif %}
             </ul>
         </nav>
-      </header>
-    <section>
+
+					{% if user.is_authenticated %}
+					<h3>API</h3
+					<ul>
+						<li><a href="/artist/create">API Artists</a></li>
+					<!--<li><a href="/album/create">Create Albums</a></li>
+					<li><a href="/song/create">Create Songs</a></li>
+					<li><a href="/playlist/create">Create Playlist</a></li>-->
+					{% endif %}
+				</ul>
     </section>
     <footer>
         <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
