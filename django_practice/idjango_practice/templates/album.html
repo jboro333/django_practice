@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -28,12 +27,12 @@
     <section>
       <h3>Create new Album</h3
       <form method="POST" action="">
-          {% csrf_token%}
-          {{ form.as_p }}
-          <input type="submit" value="Save Album"/>
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Save album"/>
       </form>
     </section>
     <footer>
-        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
+        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Boné</p>
     </footer>
 </body>

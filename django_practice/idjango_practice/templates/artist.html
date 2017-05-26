@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <link	rel="stylesheet"
 										href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
 				<script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
-				<script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
+				<script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -30,14 +31,66 @@
         </nav>
       </header>
     <section>
-      <h3>Create new Artist</h3
+      <h3>Create new Artist</h3>
       <form method="POST" action="">
           {% csrf_token %}
           {{ form }}
-          <input type="submit" value="Save artist"/>
+									Country:
+									<input type="text" name="srch" id="srch" list="datalist1">
+
+								<datalist id="datalist1">
+									 <option value= $select( event, "#id_country" )>
+								</datalist>
+																		<script>
+
+					        $(function() {
+					            $.getJSON("{% static "countries.json" %}", {}, function (countries) {
+					                $("#id_country").autocomplete({
+					                    source: countries
+					                });
+					            });
+					            $("#id_city").autocomplete({
+					                source: functiofn( request, response ) {
+					                    $.ajax({
+					                        url: "http://ws.geonames.org/searchJSON",
+					                        dataType: "jsonp",
+					                        data: {
+					                            featureClass: "P",
+					                            maxRows: 10,
+					                            name_startsWith: request.term,
+					                            username: "demo"
+					                        },
+					                        success: function( data ) {
+					                            response( $.map( data.geonames, function( item ) {
+					                                return {
+					                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+					                                    value: item.name,
+					                                    stateOrProvince: item.adminName1,
+					                                    countryName: item.countryName
+					                                }
+					                            }));
+					                        }
+					                    });
+					                },
+					                minLength: 2,
+					                select: function( event, ui ) {
+					                    if (ui.item) {
+					                        $("#id_stateOrProvince").val(ui.item.stateOrProvince);
+					                        $("#id_country").val(ui.item.countryName);
+					                        $("#id_zipCode").val("");
+					                    }
+					                }
+					            });
+					        });
+					    </script>
+
+
+
       </form>
     </section>
+
     <footer>
+				<input type="submit" value="Save artist"/>
         <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Boné</p>
     </footer>
 </body>
