@@ -3,10 +3,8 @@ from models import Song, Playlist, Artist, Album
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
-from  serializers  import *
-
-from  serializers  import ArtistSerializer,SongSerializer,PlaylistSerializer,AlbumSerializer
-
+from serializers import *
+from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer, AlbumSerializer
 
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
