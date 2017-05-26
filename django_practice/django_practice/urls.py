@@ -19,9 +19,12 @@ from django.contrib.auth.views import login, logout
 from idjango_practice import views
 from idjango_practice.views import *
 from django.views.generic import DetailView, ListView, UpdateView
+
 from django.views.generic import View
-# from idjango_practice.views import (login_view, register_view, logout_view)
-# from idjango_practice.views import Register
+from idjango_practice.views import *
+from idjango_practice.forms import *
+from idjango_practice.models import *
+from idjango_practice.serializers import *
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
@@ -40,7 +43,18 @@ urlpatterns = [
     # url(r'^album', views.album, name="album"),
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # url(r'^login', views.login_user, name="login"),
+    url(r'^contact', views.contact, name="contact"),
+    url(r'^artist', ArtistCreate.as_view(), name="artist"),
+    url(r'^song', SongCreate.as_view(), name="song"),
+    url(r'^album', AlbumCreate.as_view(), name="album"),
+    url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
+    # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    # url(r'^login', views.login, name="login"),
+    url(r'^accounts/', include('registration.backends.default.urls'))
+]
+
+urlpatterns += [
+    # url(r'^login', views.login, name="login")
     # urlpatterns += [
     # RESTful API
     url(r'^api/artist/$',

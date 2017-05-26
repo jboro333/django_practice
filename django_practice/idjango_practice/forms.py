@@ -19,11 +19,27 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email', 'password']
 
 
+"""
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+    model = OwnUser
+    fields = ()
+    model = User
+    fields = ['username']
+    labels = {
+        # 'first_name': 'First name',
+        # 'last_name': 'Last name',
+        # 'email': 'Email',
+        'username': 'User name'
+    }
+    exclude = ("id_user", "user_id")
 
 
+"""
 """
 class LoginForm(forms.Form):
     email = forms.EmailField()
@@ -37,25 +53,28 @@ class ContactForm(forms.Form):
     topic = forms.CharField(max_length=500)
 
 
-class PlaylistForm(ModelForm):
+class PlaylistForm(forms.ModelForm):
     class Meta:
         model = Playlist
-        exclude = ()
+        fields = ['name_playlist', 'user', 'songs']
 
 
-class AlbumForm(ModelForm):
+class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        exclude = ()
+        fields = ['name_album', 'artist']
 
 
-class SongForm(ModelForm):
+class SongForm(forms.ModelForm):
     class Meta:
         model = Song
-        exclude = ()
+        fields = ['name_song', 'artist', 'album']
 
 
-class ArtistForm(ModelForm):
+class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        exclude = ()
+        fields = ['name_artist']
+
+    def guardar(self):
+        self.cleaned_data

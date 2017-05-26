@@ -27,8 +27,14 @@
         </nav>
       </header>
     <section>
+      <h3>Create new Artist</h3
+      <form method="POST" action="">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Save artist"/>
+      </form>
     </section>
     <footer>
-        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
+        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Boné</p>
     </footer>
 </body>

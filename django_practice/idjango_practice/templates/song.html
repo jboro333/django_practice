@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Tu Música</title>
-    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="style.css">-->
 </head>
 <body>
     <header>
@@ -28,9 +28,10 @@
       </header>
     <section>
       <h3>Register new song</h3
-      <form metho="POST" action="">
+      <form action="" method="POST">
           {% csrf_token%}
-          {{ song_registration_form.as_p }}
+          {{ form.as_p }}
+          <input type="submit" value="Save song"/>
       </form>
     </section>
     <footer>

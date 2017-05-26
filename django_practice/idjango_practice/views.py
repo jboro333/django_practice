@@ -10,16 +10,17 @@ from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.views.generic import View
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 # from django.contrib.auth import login
 
+from datetime import date
 from rest_framework import generics
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -28,7 +29,8 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django import forms
 # from django.template import RequestContext
 # from django.views.generic import DetailView
 # from django.core import views as core_views
@@ -62,13 +64,8 @@ def Logout(request):
     # return redirect('../home')
 
 
-
 def home(request):
     return render(request, "home.html", {})
-
-
-def Blog(request):
-    return render(request, "index/blog.html", {})
 
 
 """
@@ -236,6 +233,8 @@ class CheckIsOwnerMixin(object):
         return obj
 
 
+=======
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 def contact(request):
     form = ContactForm
     context = {
@@ -265,11 +264,16 @@ class PlaylistDetail(DetailView):
 
 class PlaylistCreate(CreateView):
     model = Playlist
+<<<<<<< HEAD
     template_name = 'youridjango_practice/playlist_create.html'
+=======
+    template_name = 'playlist.html'
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = PlaylistForm
+    success_url = '/playlist_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         return super(PlaylistCreate, self).form_valid(form)
 
 
@@ -282,17 +286,29 @@ class SongDetail(DetailView):
         return context
         """
     def song_review(request, pk):
+<<<<<<< HEAD
         artist = get_object
         """
+=======
+        # artist = get_object
+        pass
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 
 
+# clase vista
 class SongCreate(CreateView):
     model = Song
+<<<<<<< HEAD
     template_name = 'idjango_practice/playlist_create.html'
+=======
+    template_name = 'song.html'
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = SongForm
+    success_url = '/song_created'
 
+    # funcion vista
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # self.object = form.save()
         return super(SongCreate, self).form_valid(form)
 
 
@@ -307,17 +323,27 @@ class ArtistDetail(DetailView):
 
 class ArtistCreate(CreateView):
     model = Artist
+<<<<<<< HEAD
     template_name = 'idjango_practice/artist_create.html'
+=======
+    template_name = 'artist.html'
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = ArtistForm
+    success_url = '/artist_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(ArtistCreate, self).form_valid(form)
+        # return super(ArtistCreate, self).form_valid(form)
+        result = super(ArtistCreate, self).form_valid(form)
+        return result
 
 
 class AlbumDetail(DetailView):
     model = Album
+<<<<<<< HEAD
     template_name = 'idjango_practice/album_detail.html'
+=======
+    template_name = 'yourmusic/album.html'
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
@@ -326,13 +352,34 @@ class AlbumDetail(DetailView):
 
 class AlbumCreate(CreateView):
     model = Album
+<<<<<<< HEAD
     template_name = 'idjango_practice/album_create.html'
+=======
+    template_name = 'album.html'
+>>>>>>> 0a64de0cf32077da44d03943373f82ce68bb5098
     form_class = AlbumForm
+    success_url = '/album_created'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # form.instance.user = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
+
+"""
+def artistCreate(request):
+    form = ArtistForm(request.POST)
+    form_data = form.cleaned_data()  # obtenemos la info del formulario
+    obj = Artist()
+    obj.name_artist = form_data.get("name_artist")
+    # obj.sport_type = form_data.get("sport_type")
+    obj.date = date.today()
+    # obj.user = request.user.id
+    obj.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'artist.html', context)
+"""
 # API views
 
 
@@ -348,56 +395,60 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
+    def get_context(self, **kwargs):
+        context = super(ArtistDetail, self).get_context_data(**kwargs)
+        return context
+
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
 
 class APISongList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
 
 class APIPlaylistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
 
 class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
 
 class APIAlbumList(generics.ListCreateAPIView):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer
 
 
 class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
-        permission_classes = (IsOwnerOrReadOnly,)
+        permission_classes = (IsOwnerOrReadOnly)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer

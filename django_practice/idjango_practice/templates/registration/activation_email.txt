@@ -1,0 +1,5 @@
+{% load i18n %}
+{% trans "Activa tu cuenta en" %} {{ site.name }}:
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+http://example.com/accounts/activate/codigo_activación_django_admin
+{% blocktrans %}Enlace válido durante {{ expiration_days }} días.{% endblocktrans %}
