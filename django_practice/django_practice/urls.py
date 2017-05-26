@@ -18,39 +18,46 @@ from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from idjango_practice import views
 from idjango_practice.views import *
+from django.views.generic import DetailView, ListView, UpdateView
+from django.views.generic import View
+# from idjango_practice.views import (login_view, register_view, logout_view)
 # from idjango_practice.views import Register
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
-    url(r'^accounts/login/$', login, name='login'),
-    url(r'^accounts/logout/$', logout, name='logout'),
-    # url(r'^register', views.register, name="register"),
-    # url(r'^register', Register.as_view(), name='register'),
+    url(r'^login/$', views.Login),
+    url(r'^logout/$', views.Logout),
+    url(r'^home/$', views.home, name="home"),
+    # url(r'^login/', login_view, name="login"),
+    # url(r'^logout/', logout, name="logout"),
+    url(r'^admin/', admin.site.urls),
     url(r'^contact', views.contact, name="contact"),
+    # url(r'^accounts/login/$', login, name='login'),
+    # url(r'^accounts/logout/$', logout, name='logout'),
+    # url(r'^register/$', views.UserFormView, name="register"),
     # url(r'^artist', ArtistDetail, name="artist"),
-    # url(r'^song', views.song, name="song"),
+    url(r'^song', views.SongCreate, name="song"),
     # url(r'^album', views.album, name="album"),
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # url(r'^login', views.login, name="login")
-#urlpatterns += [
-        # RESTful API
+    # url(r'^login', views.login_user, name="login"),
+    # urlpatterns += [
+    # RESTful API
     url(r'^api/artist/$',
-            APIArtistList.as_view(), name='artist-list'),
+        APIArtistList.as_view(), name='artist-list'),
     url(r'^api/artist/(?P<pk>\d+)/$',
-            APIArtistDetail.as_view(), name='artist-detail'),
+        APIArtistDetail.as_view(), name='artist-detail'),
     url(r'^api/playlist/$',
-            login_required(APIPlaylistList.as_view()), name='playlist-list'),
+        login_required(APIPlaylistList.as_view()), name='playlist-list'),
     url(r'^api/playlist/(?P<pk>\d+)/$',
-            APIPlaylistDetail.as_view(), name='playlist-detail'),
+        APIPlaylistDetail.as_view(), name='playlist-detail'),
     url(r'^api/song/$',
-            APISongList.as_view(), name='song-list'),
+        APISongList.as_view(), name='song-list'),
     url(r'^api/song/(?P<pk>\d+)/$',
-            APISongDetail.as_view(), name='song-detail'),
+        APISongDetail.as_view(), name='song-detail'),
     url(r'^api/album/$',
-            APIAlbumList.as_view(), name='album-list'),
+        APIAlbumList.as_view(), name='album-list'),
     url(r'^api/song/(?P<pk>\d+)/$',
-            APIAlbumDetail.as_view(), name='album-detail'),
-    #]
+        APIAlbumDetail.as_view(), name='album-detail'),
+    # ]
 ]

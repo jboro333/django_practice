@@ -47,6 +47,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
+LOGIN_URL = '/login'
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

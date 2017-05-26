@@ -7,13 +7,16 @@ from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from model import Playlist, Song, Album, Artist
 from forms import SongForm, PlaylistForm, AlbumForm, ArtistForm
-from views import SongDetail, SongCreate, AlbumDetail, AlbumCreate, \
-    PlaylistDetail, PlaylistCreate, ArtistDetail, ArtistCreate, Register, \
-    APISongList, APISongDetail, APIPlaylistList, APIPlaylistDetail, \
-    APIArtistList, APIArtistDetail, APIAlbumList, APIAlbumDetail
+from . import views
+from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
-    url(r'^register', Register.as_view(), name='register')
+    url(r'^login/', login_view, name="login"),
+    """
+    url(r'^register/$', views.register, name='register'),
+    url(r'^login_user/$', views.login_user, name='login_user'),
+    url(r'^logout_user/$', views.logout_user, name='logout_user'),
+    """
 ]
 
 urlpatterns += [
