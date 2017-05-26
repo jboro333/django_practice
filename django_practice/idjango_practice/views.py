@@ -143,7 +143,7 @@ class ArtistDetail(DetailView):
         return context
 
 
-class ArtistCreate(CreateView):
+class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
     template_name = 'form.html'
     form_class = ArtistForm

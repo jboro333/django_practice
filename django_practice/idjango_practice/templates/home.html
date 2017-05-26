@@ -32,10 +32,12 @@
         <nav>
           <h3>Menú</h3
             <ul>
+							{% if user.is_authenticated %}
               <li><a href="/artist">Create Artists</a></li>
               <li><a href="/album">Create Albums</a></li>
               <li><a href="/song">Create Songs</a></li>
               <li><a href="/playlist">Create Playlist</a></li>
+							{% endif %}
             </ul>
         </nav>
       </header>
