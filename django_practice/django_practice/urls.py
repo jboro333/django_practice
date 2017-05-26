@@ -19,6 +19,7 @@ from django.contrib.auth.views import login, logout
 from idjango_practice import views
 from idjango_practice.views import *
 from django.views.generic import DetailView, ListView, UpdateView
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from django.views.generic import View
 from idjango_practice.views import *
@@ -74,3 +75,7 @@ urlpatterns += [
         APIAlbumDetail.as_view(), name='album-detail'),
     # ]
 ]
+
+#  Format  suffixes
+urlpatterns = format_suffix_patterns(urlpatterns,  allowed=[
+    'api',  'json',  'xml'])

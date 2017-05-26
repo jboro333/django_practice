@@ -34,7 +34,6 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponse, HttpResponseRedirect
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django import forms
 # from django.template import RequestContext
 # from django.views.generic import DetailView
@@ -216,14 +215,15 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
-
+    """
     def get_context(self, **kwargs):
         context = super(ArtistDetail, self).get_context_data(**kwargs)
         return context
+    """
 
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -234,7 +234,7 @@ class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class APISongList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
