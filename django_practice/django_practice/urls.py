@@ -20,7 +20,7 @@ from idjango_practice import views
 from django.views.generic import DetailView, ListView, UpdateView
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from django.views.generic import View,RedirectView
+from django.views.generic import View, RedirectView
 from idjango_practice.views import *
 from idjango_practice.forms import *
 from idjango_practice.models import *
@@ -44,10 +44,10 @@ urlpatterns = [
     # url(r'^playlist', views.playlist, name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # List all artists: /Aplicacio/teams/
-    url(r'^artist', ArtistCreate.as_view(), name='artist'),
-    url(r'^song', SongCreate.as_view(), name="song"),
-    url(r'^album', AlbumCreate.as_view(), name="album"),
-    url(r'^playlist', PlaylistCreate.as_view(), name="playlist"),
+    url(r'^artist/', ArtistCreate.as_view(), name='artist'),
+    url(r'^song/', SongCreate.as_view(), name="song"),
+    url(r'^album/', AlbumCreate.as_view(), name="album"),
+    url(r'^playlist/$', PlaylistCreate.as_view(), name="playlist"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login"),
     # url(r'^accounts/', include('registration.backends.default.urls'))
