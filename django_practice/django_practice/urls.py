@@ -52,6 +52,10 @@ urlpatterns = [
     url(r'^album/create$', AlbumCreate.as_view(), name="album_create"),
     # url(r'^playlist/list$', PlaylistList.as_view(), name="playlist_list"),
     url(r'^playlist/create', PlaylistCreate.as_view(), name="playlist_create"),
+    url(r'^artist/$', ArtistDetail.as_view(), name='artist_detail'),
+    url(r'^song/$', SongDetail.as_view(), name="song_detail"),
+    url(r'^album/$', AlbumDetail.as_view(), name="album_detail"),
+    url(r'^playlist/$', PlaylistDetail.as_view(), name="playlist_detail"),
     # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login', views.login, name="login"),
     # url(r'^accounts/', include('registration.backends.default.urls'))

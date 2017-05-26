@@ -15,6 +15,7 @@ class Artist(models.Model):
     name_artist = models.TextField(max_length=50)
     url = models.URLField()
     # user = models.ForeignKey(User, default=-1)
+    user = models.ForeignKey(User, default=1)
     # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
@@ -23,14 +24,11 @@ class Artist(models.Model):
     def __str__(self):  # python 3
         return self.name_artist
 
-        def get_absolute_url(self):
-            return reverse('TuMusica:artist-detail', kwargs={'pk': self.pk})
-
 
 class Album(models.Model):
-    id_album = models.AutoField(primary_key=True)
+    id_album = models.AutoField(primary_key=True, default=1)
     name_album = models.TextField(max_length=50)
-    artist = models.ForeignKey(Artist, default=-1)
+    artist = models.ForeignKey(Artist, default=2)
 
     def __unicode__(self):
         return self.name_album
@@ -43,10 +41,10 @@ class Album(models.Model):
 
 
 class Song(models.Model):
-    id_song = models.AutoField(primary_key=True)
+    id_song = models.AutoField(primary_key=True, default=1)
     name_song = models.TextField(max_length=50)
     # artist = models.ForeignKey(Artist)
-    album = models.ForeignKey(Album)
+    album = models.ForeignKey(Album, default=2)
 
     def __str__(self):  # python 3
         return self.name_song
@@ -60,7 +58,7 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
-    id_playlist = models.AutoField(primary_key=True)
+    id_playlist = models.AutoField(primary_key=True, default=1)
     name_playlist = models.TextField(max_length=50)
     user = models.ForeignKey(User)
     songs = models.ManyToManyField(Song)
