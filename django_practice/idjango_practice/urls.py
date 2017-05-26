@@ -12,6 +12,8 @@ from accounts.views import (login_view, register_view, logout_view)
 urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^login/$', views.Login),
+    url(r'^idjango_practice/', include('idjango_practice.urls',
+        namespace='Music')),
     # url(r'^register', Register.as_view(), name='register'),
     # url(r'^accounts/', include('registration.backends.default.urls'))
 ]
