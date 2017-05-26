@@ -87,15 +87,12 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    # url(r'^login', views.login, name="login")
-    # urlpatterns += [
-    # RESTful API
     url(r'^api/artist/$',
         APIArtistList.as_view(), name='artist-list'),
     url(r'^api/artist/(?P<pk>\d+)/$',
         APIArtistDetail.as_view(), name='artist-detail'),
     url(r'^api/playlist/$',
-        login_required(APIPlaylistList.as_view()), name='playlist-list'),
+        APIPlaylistList.as_view(), name='playlist-list'),
     url(r'^api/playlist/(?P<pk>\d+)/$',
         APIPlaylistDetail.as_view(), name='playlist-detail'),
     url(r'^api/song/$',
@@ -104,11 +101,9 @@ urlpatterns += [
         APISongDetail.as_view(), name='song-detail'),
     url(r'^api/album/$',
         APIAlbumList.as_view(), name='album-list'),
-    url(r'^api/song/(?P<pk>\d+)/$',
+    url(r'^api/album/(?P<pk>\d+)/$',
         APIAlbumDetail.as_view(), name='album-detail'),
-    # ]
-]
+    ]
 
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=[
-'api', 'json', 'xml'])
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', 'xml'])

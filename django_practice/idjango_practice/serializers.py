@@ -59,4 +59,4 @@ class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Playlist
-        fields = ('url', 'name_playlist', 'user', 'song')
+        fields = ('url', 'name_playlist')
