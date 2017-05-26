@@ -53,25 +53,25 @@ class ContactForm(forms.Form):
     topic = forms.CharField(max_length=500)
 
 
-class PlaylistForm(forms.ModelForm):
+class PlaylistForm(ModelForm):
     class Meta:
         model = Playlist
         fields = ['name_playlist', 'user', 'songs']
 
 
-class AlbumForm(forms.ModelForm):
+class AlbumForm(ModelForm):
     class Meta:
         model = Album
         fields = ['name_album', 'artist']
 
 
-class SongForm(forms.ModelForm):
+class SongForm(ModelForm):
     class Meta:
         model = Song
         fields = ['name_song', 'artist', 'album']
 
 
-class ArtistForm(forms.ModelForm):
+class ArtistForm(ModelForm):
     class Meta:
         model = Artist
         fields = ['name_artist']

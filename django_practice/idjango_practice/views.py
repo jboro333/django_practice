@@ -337,6 +337,17 @@ class AlbumCreate(CreateView):
         return super(AlbumCreate, self).form_valid(form)
 
 
+def createSong(request):
+    form = SongForm(request.POST)
+    obj = form.save(commit=False)
+    obj.save()
+    # return HttpResponseRedirect(reverse('/home'))
+    context = {
+        'create_song_form': form
+    }
+    return render(request, 'song.html', context)
+
+
 # API views
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
