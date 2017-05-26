@@ -15,14 +15,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('id_album', models.AutoField(serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_album', models.TextField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
             name='Artist',
             fields=[
-                ('id_artist', models.AutoField(serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_artist', models.TextField(max_length=50)),
             ],
         ),
@@ -37,14 +37,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Playlist',
             fields=[
-                ('id_playlist', models.AutoField(serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_playlist', models.TextField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
             name='Song',
             fields=[
-                ('id_song', models.AutoField(serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_song', models.TextField(max_length=50)),
                 ('album', models.ForeignKey(to='idjango_practice.Album')),
                 ('artist', models.ForeignKey(to='idjango_practice.Artist')),

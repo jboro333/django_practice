@@ -1,4 +1,10 @@
 from rest_framework.fields import CharField
+from rest_framework.relations import HyperlinkedRelatedField, HyperlinkedIdentityField
+from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework import *
+from models import *
+# from models import Artist, Album, Song, Playlist
+from django import forms
 from rest_framework.relations import HyperlinkedRelatedField
 from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.serializers import HyperlinkedModelSerializer
@@ -20,6 +26,10 @@ class ArtistSerializer(serializers.HyperlinkedModelSerializer):
         view_name='TuMusica:playlist-detail')
     user = CharField(read_only=True)
 
+    class Meta:
+        model = Artist
+        fields = ('uri', 'song', 'playlist_set', 'user', 'name_artist', 'album')
+
 
 class Meta:
     model = Artist
@@ -28,6 +38,8 @@ class Meta:
 
 class AlbumSerializer(HyperlinkedModelSerializer):
     uri = HyperlinkedIdentityField(view_name='TuMusica:album-detail')
+    artist = HyperlinkedRelatedField(view_name='TuMusica:artist-detail', read_only=True)
+    songs = HyperlinkedRelatedField(many=True, read_only=True, view_name='TuMusica_song-detail')
     artist = HyperlinkedRelatedField(
         view_name='TuMusica:artist-detail', read_only=True)
     songs = HyperlinkedRelatedField(
@@ -55,6 +67,7 @@ class SongSerializer(HyperlinkedModelSerializer):
 class PlaylistSerializer(HyperlinkedModelSerializer):
 
     uri = HyperlinkedIdentityField(view_name='TuMusica:playlist-detail')
+    song = HyperlinkedRelatedField(view_name='TuMusica:song-detail', read_only=True)
     song = HyperlinkedRelatedField(
         view_name='TuMusica:song-detail', read_only=True)
     user = CharField(read_only=True)

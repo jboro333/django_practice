@@ -4,6 +4,10 @@ from models import Song, Playlist, Artist, Album
 from django_practice import settings
 from .forms import ContactForm, UserForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
+
+from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer
+from serializers import AlbumSerializer
+
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
@@ -187,24 +191,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
         return super(AlbumCreate, self).form_valid(form)
 
 
-"""
-def artistCreate(request):
-    form = ArtistForm(request.POST)
-    form_data = form.cleaned_data()  # obtenemos la info del formulario
-    obj = Artist()
-    obj.name_artist = form_data.get("name_artist")
-    # obj.sport_type = form_data.get("sport_type")
-    obj.date = date.today()
-    # obj.user = request.user.id
-    obj.save()
-    context = {
-        'form': form
-    }
-    return render(request, 'artist.html', context)
-"""
 # API views
-
-
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
     def has_object_permission(self, request, view, obj):
