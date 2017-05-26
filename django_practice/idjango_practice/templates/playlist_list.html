@@ -1,0 +1,8 @@
+<h1>List of playlist</h1>
+<ul>
+  {% for item in playlist_list %}
+      <li>{{ item.name_playlist }}</li>
+    {% empty %}
+      <li>No articles yet.</li>
+    {% endfor %}
+</ul>
