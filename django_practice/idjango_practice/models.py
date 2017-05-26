@@ -11,9 +11,9 @@ class OwnUser(models.Model):
 
 
 class Artist(models.Model):
-    # id_artist = models.AutoField(primary_key=True)
+    id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
-    # albums = models.ManyToManyField(Album)
+    # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
             return self.name_artist
@@ -26,7 +26,7 @@ class Artist(models.Model):
 
 
 class Album(models.Model):
-    # id_album = models.AutoField(primary_key=True)
+    id_album = models.AutoField(primary_key=True)
     name_album = models.TextField(max_length=50)
     artist = models.ForeignKey(Artist, default=-1)
 
@@ -42,7 +42,7 @@ class Album(models.Model):
 
 
 class Song(models.Model):
-    # id_song = models.AutoField(primary_key=True)
+    id_song = models.AutoField(primary_key=True)
     name_song = models.TextField(max_length=50)
     artist = models.ForeignKey(Artist)
     album = models.ForeignKey(Album)
@@ -59,7 +59,7 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
-    # id_playlist = models.AutoField(primary_key=True)
+    id_playlist = models.AutoField(primary_key=True)
     name_playlist = models.TextField(max_length=50)
     user = models.ForeignKey(User)
     songs = models.ManyToManyField(Song)
