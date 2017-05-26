@@ -21,6 +21,9 @@ class Artist(models.Model):
     def __str__(self):  # python 3
         return self.name_artist
 
+        def get_absolute_url(self):
+            return reverse('TuMusica:artist-detail', kwargs={'pk': self.pk})
+
 
 class Album(models.Model):
     id_album = models.AutoField(primary_key=True)
@@ -32,6 +35,10 @@ class Album(models.Model):
 
     def __str__(self):  # python 3
         return self.name_album
+
+    def get_absolute_url(self):
+        return reverse('TuMusica:album-detail', kwargs={'pkr': self.artist.pk, ' \
+        pk': self.pk})
 
 
 class Song(models.Model):
@@ -46,6 +53,10 @@ class Song(models.Model):
     def __str__(self):  # python 3
         return self.name_song
 
+    def get_absolute_url(self):
+        return reverse('TuMusica:song-detail', kwargs={'pkr': self.artist.pk, ' \
+        pk': self.pk})
+
 
 class Playlist(models.Model):
     id_playlist = models.AutoField(primary_key=True)
@@ -58,3 +69,6 @@ class Playlist(models.Model):
 
     def __str__(self):  # python 3
         return self.name_playlist
+
+    def get_absolute_url(self):
+        return reverse('TuMusica:playlist-detail', kwargs={'pk': self.pk})

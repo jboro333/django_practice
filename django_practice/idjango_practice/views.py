@@ -4,13 +4,17 @@ from models import Song, Playlist, Artist, Album
 from forms import LoginForm, ContactForm, RegisterForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 from  serializers  import *
+
+from  serializers  import ArtistSerializer,SongSerializer,PlaylistSerializer,AlbumSerializer
+
+
 from serializers import ArtistSerializer, AlbumSerializer, SongSerializer
 from serializers import PlaylistSerializer
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 from django.views.generic import CreateView, ListView, DetailView, FormView
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -19,13 +23,15 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from rest_framework import permissions, generics
 # from django.contrib.auth import login
+
 from datetime import date
 from rest_framework import generics
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from rest_framework import permissions, generics
+#from rest_framework import permissions, generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django import forms
 # from django.template import RequestContext
@@ -163,56 +169,60 @@ class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
 
 class APIArtistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
+    def get_context(self, **kwargs):
+        context = super(ArtistDetail, self).get_context_data(**kwargs)
+        return context
+
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
 
 class APISongList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
 
 class APIPlaylistList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
 
 class APIPlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwnerOrReadOnly)
     model = Playlist
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
 
 
 class APIAlbumList(generics.ListCreateAPIView):
-        permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+        permission_classes = (permissions.IsAuthenticatedOrReadOnly)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer
 
 
 class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
-        permission_classes = (IsOwnerOrReadOnly,)
+        permission_classes = (IsOwnerOrReadOnly)
         model = Album
         queryset = Album.objects.all()
         serializer_class = AlbumSerializer
