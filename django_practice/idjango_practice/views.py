@@ -1,5 +1,5 @@
 # from django.template.context import RequestContext
-from models import Song, Playlist, Artist, Album
+from models import Song, Playlist, Artist, Album, ArtistReview
 # from forms import AlbumForm, SongForm, PlaylistForm, Artistform
 from django_practice import settings
 from .forms import ContactForm, UserForm
@@ -161,6 +161,7 @@ class ArtistDetail(DetailView):
 
     def get_context(self, **kwargs):
         context = super(ArtistDetail, self).get_context_data(**kwargs)
+        context['RATING_CHOICES'] = ArtistReview.RATING_CHOICES
         return context
 
 
@@ -182,6 +183,7 @@ class ArtistList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArtistList, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
+        context['RATING_CHOICES'] = ArtistReview.RATING_CHOICES
         return context
 
 
@@ -214,6 +216,18 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
         # form.instance.user = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
+
+def review(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    if ArtistReview.objects.filter(artist=artist, user=request.user).exists():
+        ArtistReview.objects.get(artist=artist, user=request.user).delete()
+    new_review = ArtistReview(
+        rating=request.POST['rating'],
+        comment=request.POST['comment'],
+        user=request.user,
+        artist=artist)
+    new_review.save()
+    return HttpResponseRedirect(reverse('django_practice:artist_detail', args=(artist.id_artist)))
 
 # API views
 # class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
@@ -289,3 +303,19 @@ class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Album
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
+
+
+"""
+class APIArtistReviewList(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    model = Album
+    queryset = Album.objects.all()
+    serializer_class = ArtistSerializer
+
+
+class APIArtistReviewLDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    model = Album
+    queryset = Album.objects.all()
+    serializer_class = ArtistSerializer
+"""

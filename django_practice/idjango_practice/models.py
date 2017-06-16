@@ -24,6 +24,31 @@ class Artist(models.Model):
     def __str__(self):  # python 3
         return self.name_artist
 
+    def averageRating(self):
+        reviewCount = self.artistreview_set.count()
+        if not reviewCount:
+            return 0
+        else:
+            ratingSum = sum([float(review.rating) for review in self.aristreview_set.all()])
+            return ratingSum / reviewCount
+
+
+class Review(models.Model):
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
+    comment = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, default=1)
+
+    class Meta:
+        abstract = True
+
+
+class ArtistReview(Review):
+    artist = models.ForeignKey(Artist)
+
+    class Meta:
+        unique_together = ("artist", "user")
+
 
 class Album(models.Model):
     id_album = models.AutoField(primary_key=True, default=-1)

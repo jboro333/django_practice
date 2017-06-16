@@ -24,6 +24,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from idjango_practice.forms import *
 from idjango_practice.models import Playlist, Artist, Song, Album
 from idjango_practice.serializers import *
+from idjango_practice.views import review
 
 urlpatterns = [
     # url de la pagina principal
@@ -41,7 +42,8 @@ urlpatterns = [
     url(r'^album/create$', views.AlbumCreate.as_view(), name="album_create"),
     url(r'^playlist/create', views.PlaylistCreate.as_view(), name="playlist_create"),
     # urls's de detalles de los objetos
-    url(r'^artist/(?P<pk>\d+)/$', views.ArtistDetail.as_view(), name='artist_detail'),
+    url(r'^artist/(?P<pk>\d+)/$', views.ArtistDetail.as_view(),
+        name='artist_detail'),
     url(r'^song/(?P<pk>\d+)/$', views.SongDetail.as_view(), name="song_detail"),
     url(r'^album/(?P<pk>\d+)/$', views.AlbumDetail.as_view(), name="album_detail"),
     url(r'^playlist/(?P<pk>\d+)/$', views.PlaylistDetail.as_view(), name="playlist_detail"),
@@ -70,6 +72,11 @@ urlpatterns = [
             context_object_name='playlist_list',
             template_name='playlist_list.html'),
         name='playlist_list'),
+
+    # Create a artist review
+    url(r'^artists/(?P<pk>\d+)/reviews/create/$',
+        review,
+        name='review_create'),
 ]
 
 urlpatterns += [
@@ -91,8 +98,7 @@ urlpatterns += [
         views.APIAlbumDetail.as_view(), name='album-detail'),
     ]
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', '\
-xml'])
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', 'xml'])
 
 """
 if settings.DEBUG:
