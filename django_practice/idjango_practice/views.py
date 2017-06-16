@@ -181,7 +181,6 @@ class ArtistList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArtistList, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
-        context['RATING_CHOICES'] = ArtistReview.RATING_CHOICES
         return context
 
 
