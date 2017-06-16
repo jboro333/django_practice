@@ -61,11 +61,6 @@ class Album(models.Model):
     def __str__(self):  # python 3
         return self.name_album
 
-    """
-    def get_absolute_url(self):
-        return reverse('TuMusica:album-detail', kwargs={'pk': self.pk})
-    """
-
 
 class Song(models.Model):
     id_song = models.AutoField(primary_key=True)
@@ -75,13 +70,9 @@ class Song(models.Model):
 
     def __str__(self):  # python 3
         return self.name_song
-    """
+
     def __unicode__(self):
             return self.name_song
-
-    def get_absolute_url(self):
-        return reverse('TuMusica:song-detail', kwargs={'pk': self.pk})
-    """
 
 
 class Playlist(models.Model):

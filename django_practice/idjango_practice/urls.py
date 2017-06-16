@@ -25,12 +25,7 @@ from idjango_practice.views import review
 urlpatterns = [
     # url de la pagina principal
     url(r'^$', views.home, name="home"),
-    url(r'^home', views.home, name="home"),
-    # url login, logout y contacto
-    url(r'^contact', views.contact, name="contact"),
-    # url del panle de administracion
 
-    # url's de los formularios de creacion
     url(r'^artist/create/$', views.ArtistCreate.as_view(), name='artist_create'),
     url(r'^song/create', views.SongCreate.as_view(), name="song_create"),
     url(r'^album/create$', views.AlbumCreate.as_view(), name="album_create"),
@@ -71,9 +66,6 @@ urlpatterns = [
     url(r'^artists/(?P<pk>\d+)/reviews/create/$',
         review,
         name='review_create'),
-]
-
-urlpatterns += [
     url(r'^api/artist/$',
         views.APIArtistList.as_view(), name='api-artist-list'),
     url(r'^api/artist/(?P<pk>\d+)/$',

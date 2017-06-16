@@ -1,0 +1,14 @@
+{% load staticfiles %}
+{% block footer %}
+{% if user.is_authenticated %}
+<h3>API</h3
+<ul>
+  <li><a href="/musica/api/artist/">API Artists</a></li>
+  <li><a href="/musica/api/album">API Albums</a></li>
+  <li><a href="/musica/api/song">API Songs</a></li>
+<li><a href="/musica/api/playlist">API Playlist</a></li>
+{% endif %}
+{% endblock %}
+<div id="footer">
+    <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
+</footer>

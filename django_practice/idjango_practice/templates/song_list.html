@@ -1,3 +1,5 @@
+{% extends "home.html" %}
+{% block song_list %}
 <h1>List of songs</h1>
 <ul>
 {% for item in song_list %}
@@ -6,3 +8,4 @@
     <li>No articles yet.</li>
 {% endfor %}
 </ul>
+{% endblock %}

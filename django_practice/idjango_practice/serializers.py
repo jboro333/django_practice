@@ -10,7 +10,7 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ('uri', 'name_artist')
+        fields = ('uri', 'name_artist', 'id_artist')
 
 
 class SongSerializer(HyperlinkedModelSerializer):
