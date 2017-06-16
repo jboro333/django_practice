@@ -215,16 +215,16 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
         return super(AlbumCreate, self).form_valid(form)
 
 
-# API views
-# class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
+#API views
+class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
-#    def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed to any request,
+    def has_object_permission(self, request, view, obj):
+         #Read permissions are allowed to any request,
 
-#        if request.method in permissions.SAFE_METHODS:
-#            return True
+        if request.method in permissions.SAFE_METHODS:
+            return True
 
-#        return obj.user == request.user
+        return obj.user == request.user
 
 
 class APIArtistList(generics.ListCreateAPIView):
@@ -233,9 +233,9 @@ class APIArtistList(generics.ListCreateAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
-    def get_context(self, **kwargs):
-        context = super(ArtistDetail, self).get_context_data(**kwargs)
-        return context
+    #def get_context(self, **kwargs):
+    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
+    #    return context
 
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -251,9 +251,9 @@ class APISongList(generics.ListCreateAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
-    def get_context(self, **kwargs):
-        context = super(ArtistDetail, self).get_context_data(**kwargs)
-        return context
+    #def get_context(self, **kwargs):
+    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
+    #    return context
 
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
