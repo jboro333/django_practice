@@ -81,6 +81,10 @@ urlpatterns = [
         views.APIAlbumList.as_view(), name='api-album-list'),
     url(r'^api/album/(?P<pk>\d+)/$',
         views.APIAlbumDetail.as_view(), name='api-album-detail'),
+    url(r'^api/artist/reviews/$',
+        views.APIArtistReviewList.as_view(), name='api-artist-review-list'),
+    url(r'^api/artist/review/(?P<pk>\d+)/$',
+        views.APIArtistReviewLDetail.as_view(), name='api-artist-review-detail')
     ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', 'xml'])

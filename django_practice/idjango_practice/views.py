@@ -186,7 +186,7 @@ class ArtistList(ListView):
 
 class AlbumDetail(DetailView):
     model = Album
-    template_name = 'album.html'
+    template_name = 'album_detail.html'
 
     def get_context(self, **kwargs):
         context = super(AlbumDetail, self).get_context_data(**kwargs)
@@ -293,13 +293,13 @@ class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class APIArtistReviewList(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    model = Album
+    model = ArtistReview
     queryset = Album.objects.all()
     serializer_class = ArtistSerializer
 
 
 class APIArtistReviewLDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    model = Album
+    model = ArtistReview
     queryset = Album.objects.all()
     serializer_class = ArtistSerializer
