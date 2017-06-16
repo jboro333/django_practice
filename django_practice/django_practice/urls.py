@@ -81,21 +81,21 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^api/artist/$',
-        views.APIArtistList.as_view(), name='artist-list'),
+        views.APIArtistList.as_view(), name='api-artist-list'),
     url(r'^api/artist/(?P<pk>\d+)/$',
-        views.APIArtistDetail.as_view(), name='artist-detail'),
+        views.APIArtistDetail.as_view(), name='api-artist-detail'),
     url(r'^api/playlist/$',
-        views.APIPlaylistList.as_view(), name='playlist-list'),
+        views.APIPlaylistList.as_view(), name='api-playlist-list'),
     url(r'^api/playlist/(?P<pk>\d+)/$',
-        views.APIPlaylistDetail.as_view(), name='playlist-detail'),
+        views.APIPlaylistDetail.as_view(), name='api-playlist-detail'),
     url(r'^api/song/$',
-        views.APISongList.as_view(), name='song-list'),
+        views.APISongList.as_view(), name='api-song-list'),
     url(r'^api/song/(?P<pk>\d+)/$',
-        views.APISongDetail.as_view(), name='song-detail'),
+        views.APISongDetail.as_view(), name='api-song-detail'),
     url(r'^api/album/$',
-        views.APIAlbumList.as_view(), name='album-list'),
+        views.APIAlbumList.as_view(), name='api-album-list'),
     url(r'^api/album/(?P<pk>\d+)/$',
-        views.APIAlbumDetail.as_view(), name='album-detail'),
+        views.APIAlbumDetail.as_view(), name='api-album-detail'),
     ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', 'xml'])

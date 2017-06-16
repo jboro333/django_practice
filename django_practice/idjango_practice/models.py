@@ -13,9 +13,9 @@ class OwnUser(models.Model):
 class Artist(models.Model):
     id_artist = models.AutoField(primary_key=True)
     name_artist = models.TextField(max_length=50)
-    url = models.URLField(default="/")
+    # url = models.URLField(default="/")
     # user = models.ForeignKey(User, default=-1)
-    user = models.ForeignKey(User, default=1)
+    # user = models.ForeignKey(User, default=-1)
     # albums = models.ForeignKey(Album)
 
     def __unicode__(self):
@@ -61,8 +61,10 @@ class Album(models.Model):
     def __str__(self):  # python 3
         return self.name_album
 
+    """
     def get_absolute_url(self):
         return reverse('TuMusica:album-detail', kwargs={'pk': self.pk})
+    """
 
 
 class Song(models.Model):
