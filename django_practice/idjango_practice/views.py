@@ -227,18 +227,12 @@ def review(request, pk):
     return HttpResponseRedirect(reverse('django_practice:artist_detail', args=(artist.id_artist)))
 
 # API views
-# class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
-
-
-# API views
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
     def has_object_permission(self, request, view, obj):
-         # Read permissions are allowed to any request,
 
         if request.method in permissions.SAFE_METHODS:
             return True
-
         return obj.user == request.user
 
 
@@ -247,10 +241,6 @@ class APIArtistList(generics.ListCreateAPIView):
     model = Artist
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
-
-    # def get_context(self, **kwargs):
-    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
-    #    return context
 
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -265,11 +255,6 @@ class APISongList(generics.ListCreateAPIView):
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
-
-    # def get_context(self, **kwargs):
-    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
-    #    return context
-
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -306,7 +291,7 @@ class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AlbumSerializer
 
 
-"""
+
 class APIArtistReviewList(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     model = Album
@@ -319,4 +304,3 @@ class APIArtistReviewLDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Album
     queryset = Album.objects.all()
     serializer_class = ArtistSerializer
-"""

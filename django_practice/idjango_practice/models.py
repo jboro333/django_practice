@@ -51,9 +51,9 @@ class ArtistReview(Review):
 
 
 class Album(models.Model):
-    id_album = models.AutoField(primary_key=True, default=-1)
+    id_album = models.AutoField(primary_key=True)
     name_album = models.TextField(max_length=50)
-    artist = models.ForeignKey(Artist, default=-1)
+    artist = models.ForeignKey(Artist)
 
     def __unicode__(self):
         return self.name_album
@@ -68,10 +68,10 @@ class Album(models.Model):
 
 
 class Song(models.Model):
-    id_song = models.AutoField(primary_key=True, default=-1)
+    id_song = models.AutoField(primary_key=True)
     name_song = models.TextField(max_length=50)
-    artist = models.ForeignKey(Artist, default=-1)
-    album = models.ForeignKey(Album, default=-1)
+    artist = models.ForeignKey(Artist)
+    album = models.ForeignKey(Album)
 
     def __str__(self):  # python 3
         return self.name_song
@@ -85,7 +85,7 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
-    id_playlist = models.AutoField(primary_key=True, default=1)
+    id_playlist = models.AutoField(primary_key=True)
     name_playlist = models.TextField(max_length=50)
     user = models.ForeignKey(User)
     songs = models.ManyToManyField(Song)
