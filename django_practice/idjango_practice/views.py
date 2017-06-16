@@ -226,11 +226,10 @@ def review(request, pk):
     new_review.save()
     return HttpResponseRedirect(reverse('idjango_practice:artist_detail', args=(artist.id_artist,)))
 
+
 # API views
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
-
     def has_object_permission(self, request, view, obj):
-
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj.user == request.user
@@ -255,6 +254,7 @@ class APISongList(generics.ListCreateAPIView):
     model = Song
     queryset = Song.objects.all()
     serializer_class = SongSerializer
+
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

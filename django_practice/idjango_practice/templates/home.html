@@ -14,42 +14,40 @@
         <nav>
 					 <ul>
               {% if user.is_authenticated %}
-							  <ul>
-                	<li><a href="/logout">Logout</a></li>
-									<li><a href="/contact">Contacto</a></li>
-
+                  <li><a href="/logout">Logout</a></li>
+								  <li><a href="/contact">Contacto</a></li>
               {% else %}
-
                 <li><a href="/login/">Login</a><li>
 								<li><a href="/contact">Contacto</a></li
-
               {% endif %}
-
 						</ul>
-
         </nav>
 		</header>
 		<section>
         <nav>
           <h3>Menú</h3
             <ul>
+              <li><a href="/musica/artists/">See Artists</a></li>
+              <li><a href="/musica/albums/">See Albums</a></li>
+              <li><a href="/musica/songs/">See Songs</a></li>
+              <li><a href="/musica/playlists/">See Playlist</a></li>
 							{% if user.is_authenticated %}
+<<<<<<< HEAD
                             <li><a href="/musica/artists/">See Artists</a></li>
                            <li><a href="/musica/albums/">See Albums</a></li>
                            <li><a href="/musica/songs/">See Songs</a></li>
                            <li><a href="/musica/playlists/">See Playlist</a></li>
+=======
+>>>>>>> af245831771144e26d4e7569d9d8074dc79e4e0d
               <li><a href="/musica/artist/create">Create Artists</a></li>
               <li><a href="/musica/album/create">Create Albums</a></li>
               <li><a href="/musica/song/create">Create Songs</a></li>
               <li><a href="/musica/playlist/create">Create Playlist</a></li>
 							{% else %}
-			   <li><a href="/musica/artists/">See Artists</a></li>
-              <li><a href="/musica/albums/">See Albums</a></li>
-              <li><a href="/musica/songs/">See Songs</a></li>
-              <li><a href="/musica/playlists/">See Playlist</a></li>
 							{% endif %}
             </ul>
         </nav>
+<<<<<<< HEAD
 
 					{% if user.is_authenticated %}
 					<h3>API</h3
@@ -63,8 +61,20 @@
 
 					{% endif %}
 				</ul>
+=======
+        {% block contact %}
+        {% endblock %}
+        {% block artist_list %}
+        {% endblock %}
+        {% block playlist_list %}
+        {% endblock %}
+        {% block album_list %}
+        {% endblock %}
+        {% block song_list %}
+        {% endblock %}
+        {% block form %}
+        {% endblock %}
+>>>>>>> af245831771144e26d4e7569d9d8074dc79e4e0d
     </section>
-    <div id="footer">
-        <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
-    </footer>
+    {% include "footer.html" %}
 </body>

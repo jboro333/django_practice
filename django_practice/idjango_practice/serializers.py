@@ -10,8 +10,8 @@ class ArtistSerializer(HyperlinkedModelSerializer):
 
     class Meta:
         model = Artist
-
         fields = ('uri', 'name_artist', 'id_artist')
+
 
 class SongSerializer(HyperlinkedModelSerializer):
     # uri = HyperlinkedIdentityField(view_name='api-song-detail')
