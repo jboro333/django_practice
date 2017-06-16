@@ -2,10 +2,10 @@
 {% block song_list %}
 <h1>List of songs</h1>
 <ul>
-{% for item in song_list %}
-    <li>{{ item.name_song }} - {{ item.album }}</li>
-{% empty %}
-    <li>No articles yet.</li>
-{% endfor %}
+    {% for song in song_list %}
+        <li><a href="{% url 'idjango_practice:song_detail' song.id_song %}">
+            {{ song.name_song }}</a></li>
+    {% empty %}<li>Sorry, no song registered yet.</li>
+    {% endfor %}
 </ul>
 {% endblock %}

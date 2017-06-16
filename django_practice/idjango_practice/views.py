@@ -157,7 +157,7 @@ class ArtistDetail(DetailView):
     model = Artist
     template_name = 'artist_detail.html'
 
-    def get_context(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(ArtistDetail, self).get_context_data(**kwargs)
         context['RATING_CHOICES'] = ArtistReview.RATING_CHOICES
         return context
@@ -181,7 +181,6 @@ class ArtistList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ArtistList, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
-        context['RATING_CHOICES'] = ArtistReview.RATING_CHOICES
         return context
 
 
@@ -225,7 +224,7 @@ def review(request, pk):
         user=request.user,
         artist=artist)
     new_review.save()
-    return HttpResponseRedirect(reverse('django_practice:artist_detail', args=(artist.id_artist)))
+    return HttpResponseRedirect(reverse('idjango_practice:artist_detail', args=(artist.id_artist,)))
 
 
 # API views

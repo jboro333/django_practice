@@ -2,10 +2,10 @@
 {% block playlist_list %}
 <h1>List of playlist</h1>
 <ul>
-  {% for item in playlist_list %}
-      <li>{{ item.name_playlist }}</li>
-    {% empty %}
-      <li>No articles yet.</li>
+    {% for playlist in playlist_list %}
+        <li><a href="{% url 'idjango_practice:playlist_detail' playlist.id_playlist %}">
+            {{ playlist.name_playlist }}</a></li>
+    {% empty %}<li>Sorry, no playlist registered yet.</li>
     {% endfor %}
 </ul>
 {% endblock %}

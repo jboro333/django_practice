@@ -29,7 +29,7 @@ class Artist(models.Model):
         if not reviewCount:
             return 0
         else:
-            ratingSum = sum([float(review.rating) for review in self.aristreview_set.all()])
+            ratingSum = sum([float(review.rating) for review in self.artistreview_set.all()])
             return ratingSum / reviewCount
 
 
