@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<link	rel="stylesheet"
-										href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
-				<script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
-				<script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link	rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
+<script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
+<script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <title>Tu Música</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="templates/static/style.css">
 </head>
-<body>
-    <header>
+<div id="body">
+    <div id="header">
         <h1><a href="/">Tu Música</a></h1>
         <nav>
 					 <ul>
@@ -29,7 +28,7 @@
 						</ul>
 
         </nav>
-			</header>
+		</header>
 		<section>
         <nav>
           <h3>Menú</h3
@@ -58,7 +57,7 @@
 					{% endif %}
 				</ul>
     </section>
-    <footer>
+    <div id="footer">
         <p>Creado por: Alberto Sanmartin, Jordi Boronat y Juan Bone</p>
     </footer>
 </body>

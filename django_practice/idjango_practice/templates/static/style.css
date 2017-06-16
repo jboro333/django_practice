@@ -1,0 +1,30 @@
+
+#body {
+  position: relative;
+  background-color: grey;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 30 px;
+  font-style: italic;
+}
+
+header {
+  position: relative;
+  background-color: grey;
+}
+
+section {
+
+}
+
+#footer {
+  background-color: green;
+}
+
+nav {
+
+}
+
+p {
+
+}
