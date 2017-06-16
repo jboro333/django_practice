@@ -17,7 +17,7 @@
 							  <ul>
                 	<li><a href="/logout">Logout</a></li>
 									<li><a href="/contact">Contacto</a></li>
-
+                  
               {% else %}
 
                 <li><a href="/login/">Login</a><li>
@@ -34,19 +34,19 @@
           <h3>Menú</h3
             <ul>
 							{% if user.is_authenticated %}
-                            <li><a href="/artists/">See Artists</a></li>
-                           <li><a href="/albums/">See Albums</a></li>
-                           <li><a href="/songs/">See Songs</a></li>
-                           <li><a href="/playlists/">See Playlist</a></li>
-              <li><a href="/artist/create">Create Artists</a></li>
-              <li><a href="/album/create">Create Albums</a></li>
-              <li><a href="/song/create">Create Songs</a></li>
-              <li><a href="/playlist/create">Create Playlist</a></li>
+                            <li><a href="/musica/artists/">See Artists</a></li>
+                           <li><a href="/music/albums/">See Albums</a></li>
+                           <li><a href="/musica/songs/">See Songs</a></li>
+                           <li><a href="/musica/playlists/">See Playlist</a></li>
+              <li><a href="/musica/artist/create">Create Artists</a></li>
+              <li><a href="/musica/album/create">Create Albums</a></li>
+              <li><a href="/musica/song/create">Create Songs</a></li>
+              <li><a href="/musica/playlist/create">Create Playlist</a></li>
 							{% else %}
-			   <li><a href="/artists/">See Artists</a></li>
-              <li><a href="/albums/">See Albums</a></li>
-              <li><a href="/songs/">See Songs</a></li>
-              <li><a href="/playlists/">See Playlist</a></li>
+			   <li><a href="/musica/artists/">See Artists</a></li>
+              <li><a href="/musica/albums/">See Albums</a></li>
+              <li><a href="/musica/songs/">See Songs</a></li>
+              <li><a href="/musica/playlists/">See Playlist</a></li>
 							{% endif %}
             </ul>
         </nav>
@@ -54,10 +54,10 @@
 					{% if user.is_authenticated %}
 					<h3>API</h3
 					<ul>
-						<li><a href="/api/artist/">API Artists</a></li>
-						<li><a href="/api/album">API Albums</a></li>
-						<li><a href="/api/song">API Songs</a></li>
-					<li><a href="/api/playlist">API Playlist</a></li>-->
+						<li><a href="/musica/api/artist/">API Artists</a></li>
+						<li><a href="/musica/api/album">API Albums</a></li>
+						<li><a href="/musica/api/song">API Songs</a></li>
+					<li><a href="/musica/api/playlist">API Playlist</a></li>-->
 					{% endif %}
 				</ul>
     </section>

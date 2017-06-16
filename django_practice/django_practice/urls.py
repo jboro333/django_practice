@@ -36,7 +36,10 @@ from idjango_practice.views import review
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
+    url(r'^home', views.home, name="home"),
     url(r'^login/$', views.Login),
+    url(r'^logout/$', views.Logout),
+    url(r'^contact', views.contact, name="contact"),
     url(r'^musica/', include('idjango_practice.urls', namespace='idjango_practice')),
     url(r'^artists/(?P<pk>\d+)/reviews/create/$',
         review,
