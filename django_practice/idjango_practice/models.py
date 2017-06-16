@@ -36,8 +36,10 @@ class Album(models.Model):
     def __str__(self):  # python 3
         return self.name_album
 
+    """
     def get_absolute_url(self):
         return reverse('TuMusica:album-detail', kwargs={'pk': self.pk})
+    """
 
 
 class Song(models.Model):
