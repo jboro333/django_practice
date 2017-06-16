@@ -13,52 +13,38 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
-from django.contrib import admin
-from django.contrib.auth.views import login, logout
-from idjango_practice import views
-from django.views.generic import DetailView, ListView, UpdateView
-from rest_framework.urlpatterns import format_suffix_patterns
 
-from django.views.generic import View, RedirectView
-from idjango_practice.views import *
+from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from idjango_practice import views
+from django.views.generic import ListView  # DetailView, UpdateView
+from rest_framework.urlpatterns import format_suffix_patterns
 from idjango_practice.forms import *
-from idjango_practice.models import *
+from idjango_practice.models import Playlist, Artist, Song, Album
 from idjango_practice.serializers import *
 
 urlpatterns = [
+    # url de la pagina principal
     url(r'^$', views.home, name="home"),
+    url(r'^home', views.home, name="home"),
+    # url login, logout y contacto
     url(r'^login/$', views.Login),
     url(r'^logout/$', views.Logout),
-    url(r'^home/$', views.home, name="home"),
-    # url(r'^login/', login_view, name="login"),
-    # url(r'^logout/', logout, name="logout"),
-    url(r'^admin/', admin.site.urls),
     url(r'^contact', views.contact, name="contact"),
-    # url(r'^accounts/login/$', login, name='login'),
-    # url(r'^accounts/logout/$', logout, name='logout'),
-    # url(r'^register/$', views.UserFormView, name="register"),
-    # url(r'^artist', ArtistDetail, name="artist"),
-    # url(r'^song', views.SongCreate, name="song"),
-    # url(r'^album', views.album, name="album"),
-    # url(r'^playlist', views.playlist, name="playlist"),
-    # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # List all artists: /Aplicacio/teams/
-    # url(r'^artist/list/$', ArtistList.as_view(), name='artist_list'),
-    url(r'^artist/create/$', ArtistCreate.as_view(), name='artist_create'),
-    # url(r'^song/list/$', SongList.as_view(), name='song_list'),
-    url(r'^song/create', SongCreate.as_view(), name="song_create"),
-    # url(r'^album/list$', AlbumList.as_view(), name="album_list"),
-    url(r'^album/create$', AlbumCreate.as_view(), name="album_create"),
-    # url(r'^playlist/list$', PlaylistList.as_view(), name="playlist_list"),
-    url(r'^playlist/create', PlaylistCreate.as_view(), name="playlist_create"),
-    url(r'^artist/(?P<pk>\d+)/$', ArtistDetail.as_view(), name='artist_detail'),
-    url(r'^song/$', SongDetail.as_view(), name="song_detail"),
-    url(r'^album/$', AlbumDetail.as_view(), name="album_detail"),
-    url(r'^playlist/$', PlaylistDetail.as_view(), name="playlist_detail"),
-    # url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-    # url(r'^login', views.login, name="login"),
-    # url(r'^accounts/', include('registration.backends.default.urls'))
+    # url del panle de administracion
+    url(r'^admin/', admin.site.urls),
+    # url's de los formularios de creacion
+    url(r'^artist/create/$', views.ArtistCreate.as_view(), name='artist_create'),
+    url(r'^song/create', views.SongCreate.as_view(), name="song_create"),
+    url(r'^album/create$', views.AlbumCreate.as_view(), name="album_create"),
+    url(r'^playlist/create', views.PlaylistCreate.as_view(), name="playlist_create"),
+    # urls's de detalles de los objetos
+    url(r'^artist/(?P<pk>\d+)/$', views.ArtistDetail.as_view(), name='artist_detail'),
+    url(r'^song/(?P<pk>\d+)/$', views.SongDetail.as_view(), name="song_detail"),
+    url(r'^album/(?P<pk>\d+)/$', views.AlbumDetail.as_view(), name="album_detail"),
+    url(r'^playlist/(?P<pk>\d+)/$', views.PlaylistDetail.as_view(), name="playlist_detail"),
 
     url(r'^artists/$',
         ListView.as_view(
@@ -87,28 +73,29 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    # url(r'^login', views.login, name="login")
-    # urlpatterns += [
-    # RESTful API
     url(r'^api/artist/$',
-        APIArtistList.as_view(), name='artist-list'),
+        views.APIArtistList.as_view(), name='artist-list'),
     url(r'^api/artist/(?P<pk>\d+)/$',
-        APIArtistDetail.as_view(), name='artist-detail'),
+        views.APIArtistDetail.as_view(), name='artist-detail'),
     url(r'^api/playlist/$',
-        login_required(APIPlaylistList.as_view()), name='playlist-list'),
+        views.APIPlaylistList.as_view(), name='playlist-list'),
     url(r'^api/playlist/(?P<pk>\d+)/$',
-        APIPlaylistDetail.as_view(), name='playlist-detail'),
+        views.APIPlaylistDetail.as_view(), name='playlist-detail'),
     url(r'^api/song/$',
-        APISongList.as_view(), name='song-list'),
+        views.APISongList.as_view(), name='song-list'),
     url(r'^api/song/(?P<pk>\d+)/$',
-        APISongDetail.as_view(), name='song-detail'),
+        views.APISongDetail.as_view(), name='song-detail'),
     url(r'^api/album/$',
-        APIAlbumList.as_view(), name='album-list'),
-    url(r'^api/song/(?P<pk>\d+)/$',
-        APIAlbumDetail.as_view(), name='album-detail'),
-    # ]
-]
+        views.APIAlbumList.as_view(), name='album-list'),
+    url(r'^api/album/(?P<pk>\d+)/$',
+        views.APIAlbumDetail.as_view(), name='album-detail'),
+    ]
 
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api', 'json', '\
+xml'])
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=[
-'api', 'json', 'xml'])
+"""
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+"""
