@@ -229,8 +229,20 @@ def review(request, pk):
 
 
 # API views
+<<<<<<< HEAD
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
     def has_object_permission(self, request, view, obj):
+=======
+# class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
+
+
+# API views
+class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
+
+    def has_object_permission(self, request, view, obj):
+         # Read permissions are allowed to any request,
+
+>>>>>>> 076574de495aafd4006f57dd3bd552dec663cb33
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj.user == request.user
@@ -242,6 +254,13 @@ class APIArtistList(generics.ListCreateAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
+<<<<<<< HEAD
+=======
+    # def get_context(self, **kwargs):
+    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
+    #    return context
+
+>>>>>>> 076574de495aafd4006f57dd3bd552dec663cb33
 
 class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -256,6 +275,13 @@ class APISongList(generics.ListCreateAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+<<<<<<< HEAD
+=======
+    # def get_context(self, **kwargs):
+    #    context = super(ArtistDetail, self).get_context_data(**kwargs)
+    #    return context
+
+>>>>>>> 076574de495aafd4006f57dd3bd552dec663cb33
 
 class APISongDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
