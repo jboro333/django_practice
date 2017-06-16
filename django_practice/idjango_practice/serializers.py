@@ -1,5 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer
-from rest_framework.relations import HyperlinkedIdentityField, HyperlinkedRelatedField
+from rest_framework.relations import HyperlinkedIdentityField, HyperlinkedRelatedField, SlugRelatedField
 from models import Artist, Song, Playlist, Album
 
 
@@ -12,29 +12,30 @@ class ArtistSerializer(HyperlinkedModelSerializer):
         fields = ('uri', 'id_artist', 'name_artist')
 
 
-class AlbumSerializer(HyperlinkedModelSerializer):
-    uri = HyperlinkedIdentityField(view_name='api-album-detail')
-    # artist = HyperlinkedRelatedField(view_name='artist_detail', read_only=True)
-
-    class Meta:
-        model = Album
-        fields = ('uri', 'artist', 'name_album')
-
-
 class SongSerializer(HyperlinkedModelSerializer):
-    uri = HyperlinkedIdentityField(view_name='api-song-detail')
-    album = HyperlinkedRelatedField(read_only=True, view_name='album-detail')
-    artist = HyperlinkedRelatedField(read_only=True, view_name='artist-detail')
+    # uri = HyperlinkedIdentityField(view_name='api-song-detail')
+    artist = SlugRelatedField(many=False, read_only=True, slug_field='name_artist')
+    album = SlugRelatedField(many=False, read_only=True, slug_field='name_album')
 
     class Meta:
         model = Song
-        fields = ('uri', 'name_song', 'artist', 'album')
+        fields = ('id_song', 'name_song', 'artist', 'album')  # , 'album')
+
+
+class AlbumSerializer(HyperlinkedModelSerializer):
+    # uri = HyperlinkedIdentityField(view_name='api-album-detail')
+    artist = SlugRelatedField(many=False, read_only=True, slug_field='name_artist')
+    # artist = HyperlinkedRelatedField(read_only=True, view_name='artist_detail')
+
+    class Meta:
+        model = Album
+        fields = ('id_album', 'artist')
 
 
 class PlaylistSerializer(HyperlinkedModelSerializer):
-    uri = HyperlinkedIdentityField(view_name='api-playlist-detail')
-    songs = HyperlinkedRelatedField(view_name='song_detail', read_only=True)
+    # uri = HyperlinkedIdentityField(view_name='api-playlist-detail')
+    # list_songs = SlugRelatedField(many=True, slug_field='name_song', read_only=True)
 
     class Meta:
         model = Playlist
-        fields = ('uri', 'name_playlist', 'songs', 'user')
+        fields = ('id_playlist', 'name_playlist', 'songs')  # 'songs', 'user'

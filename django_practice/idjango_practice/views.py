@@ -5,9 +5,7 @@ from django_practice import settings
 from .forms import ContactForm, UserForm
 from forms import SongForm, AlbumForm, PlaylistForm, ArtistForm
 
-from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer
-from serializers import AlbumSerializer
-
+from serializers import ArtistSerializer, SongSerializer, PlaylistSerializer, AlbumSerializer
 
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView, DetailView, FormView
