@@ -215,7 +215,6 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
         return super(AlbumCreate, self).form_valid(form)
 
 
-<<<<<<< HEAD
 def review(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
     if ArtistReview.objects.filter(artist=artist, user=request.user).exists():
@@ -230,13 +229,13 @@ def review(request, pk):
 
 # API views
 # class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
-=======
-#API views
+
+
+# API views
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
->>>>>>> a9fe0110c90ffa071fa7b117dec1ee353a8cece0
 
     def has_object_permission(self, request, view, obj):
-         #Read permissions are allowed to any request,
+         # Read permissions are allowed to any request,
 
         if request.method in permissions.SAFE_METHODS:
             return True
@@ -250,7 +249,7 @@ class APIArtistList(generics.ListCreateAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
-    #def get_context(self, **kwargs):
+    # def get_context(self, **kwargs):
     #    context = super(ArtistDetail, self).get_context_data(**kwargs)
     #    return context
 
@@ -268,7 +267,7 @@ class APISongList(generics.ListCreateAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
-    #def get_context(self, **kwargs):
+    # def get_context(self, **kwargs):
     #    context = super(ArtistDetail, self).get_context_data(**kwargs)
     #    return context
 
