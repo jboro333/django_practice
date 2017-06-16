@@ -1,0 +1,20 @@
+{% block content %}
+
+<span vocab="http://schema.org/" typeof="song">
+
+<h1>
+    <span property="name">{{ song.name_song }}</span>
+
+
+
+</h1>
+
+<h2>Songs details:</h2>
+<p>
+
+    Id_song : <span property="id_song"> {{ song.id_song  }} </span><br/>
+    Name song: <span property="name_song"> {{ song.name_song }} </span><br/>
+    Artist : <span property="name_artist"> {{ song.artist.name_artist  }} </span><br/>
+    Name album: <span property="name_album"> {{ song.album.name_album }} </span><br/>
+</p>
+{% endblock  %}

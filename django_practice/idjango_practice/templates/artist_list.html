@@ -1,10 +1,11 @@
-
+{% block content %}
 
 <h1>List of artist</h1>
 <ul>
-  {% for item in artist_list %}
-      <li>{{ item.name_artist }}</li>
-    {% empty %}
-      <li>No articles yet.</li>
+    {% for artist in artist_list %}
+        <li><a href="{% url 'idjango_practice:artist_detail' artist.id_artist %}">
+            {{ artist.name_artist }}</a></li>
+    {% empty %}<li>Sorry, no artist registered yet.</li>
     {% endfor %}
 </ul>
+{% endblock %}
