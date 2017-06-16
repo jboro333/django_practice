@@ -113,7 +113,7 @@ class PlaylistList(ListView):
 
 class PlaylistCreate(LoginRequiredMixin, CreateView):
     model = Playlist
-    template_name = 'form.html'
+    template_name = 'playlist_create.html'
     form_class = PlaylistForm
     success_url = '/home'
 
@@ -143,7 +143,7 @@ class SongList(ListView):
 
 class SongCreate(LoginRequiredMixin, CreateView):
     model = Song
-    template_name = 'form.html'
+    template_name = 'song_create.html'
     form_class = SongForm
     success_url = '/home'
 
@@ -165,7 +165,7 @@ class ArtistDetail(DetailView):
 
 class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
-    template_name = 'form.html'
+    template_name = 'artist_create.html'
     form_class = ArtistForm
     success_url = '/home'
 
@@ -205,7 +205,7 @@ class AlbumList(ListView):
 
 class AlbumCreate(LoginRequiredMixin, CreateView):
     model = Album
-    template_name = 'form.html'
+    template_name = 'album_create.html'
     form_class = AlbumForm
     success_url = '/home'
 

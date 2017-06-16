@@ -1,17 +1,9 @@
-{% block content %}
-
+{% extends "home.html" %}
+{% block album_detail %}
+<h1>Album details</h1>
 <span vocab="http://schema.org/" typeof="album">
-
-<h1>
-    <span property="name">{{ album.name_album }}</span>
-
-
-
-</h1>
-
-<h2>Album details:</h2>
+<h2><span property="name">{{ album.name_album }}</span></h2>
 <p>
-
     Id Album : <span property="id_album"> {{ album.id_album  }} </span><br/>
     Album name: <span property="name_album"> {{ album.name_album }} </span><br/>
     Artist: <span property="name_album"> {{ artist.name_artist }} </span><br/>

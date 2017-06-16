@@ -1,77 +1,12 @@
-{% block content %}
-
+{% extends "home.html" %}
+{% block artist_detail %}
+<h1>Artist details</h1>
 <span vocab="http://schema.org/" typeof="artist">
-
-<h1>
-    <span property="name">{{ artist.name_artist }}</span>
-
-
-
-</h1>
-
-<h2>Artist details:</h2>
+<h2><span property="name">{{ artist.name_artist }}</span></h2>
 <p>
-
     Id_artist : <span property="id_album"> {{ artist.id_artist  }} </span><br/>
     Name artist: <span property="name_album"> {{ artist.name_artist }} </span><br/>
 </p>
+
+{% include "review_detail.html" %}
 {% endblock  %}
-
-
-<span vocab="http://schema.org/" typeof="Arist">
-<h1>
-<span property="name">{{ Artist.name }}</span>
-
-</h1>
-<h2>Reviews</h2>
-{% if artist.artistreview_set.all|length > 0 %}
-<span rel="aggregateRating">
- <p typeof="AggregateRating">
- Average rating
-<span property="ratingValue">{{ artist.averageRating|stringformat:".1f" }}</span>
- {% with artist.artistreview_set.all|length as reviewCount %}
- from <span property="reviewCount">{{ reviewCount }}
-</span> review{{ reviewCount|pluralize }}
- {% endwith %}
- </p>
-</span>
-
-<ul rel="review">
- {% for review in artist.artistreview_set.all %}
-<li typeof="Review">
- <p rel="reviewRating" typeof="Rating">
-<span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
-<span property="ratingValue">{{ review.rating }}</span>
-star{{ review.rating|pluralize }}
-{% with RATING_CHOICES|last as best %}
-<span property="bestRating" content="{{ best.0 }}"></span>
-{% endwith %}
-</p>
-<p property="description">{{ review.comment }}</p>
-<p>Created by <span property="author">{{ review.user }}</span>
- </li>
- {% endfor %}
-</ul>
-
-
-{% endif %}
-</span>
-<h3>Add Review</h3>
-<form action="{% url 'idjango_practice:review_create' artist.id_artist %}" method="post">
-    {% csrf_token %}
-    Message: <textarea name="comment" id="comment" rows="4"></textarea>
-    <p>Rating:</p>
-    <p>{% for rate in RATING_CHOICES %}
-    <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" />
-    <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label>
-    <br/>{% endfor %}
-    </p>
-    <input type="submit" value="Review" />
-</form>
-
-
-{% block footer %}
-<div>
-  Created by {{ artist.user }}
-</div>
-{% endblock %}

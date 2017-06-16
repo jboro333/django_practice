@@ -1,0 +1,33 @@
+{% load staticfiles %}
+{% block header %}
+<div id="header">
+    <h1><a href="/">Tu Música</a></h1>
+    <nav>
+       <ul>
+          {% if user.is_authenticated %}
+              <li><a href="/logout">Logout</a></li>
+              <li><a href="/contact">Contacto</a></li>
+          {% else %}
+            <li><a href="/login/">Login</a><li>
+            <li><a href="/contact">Contacto</a></li
+          {% endif %}
+        </ul>
+    </nav>
+</header>
+    <nav>
+      <h3>Menú</h3
+        <ul>
+          <li><a href="/musica/artists/">See Artists</a></li>
+          <li><a href="/musica/albums/">See Albums</a></li>
+          <li><a href="/musica/songs/">See Songs</a></li>
+          <li><a href="/musica/playlists/">See Playlist</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="/musica/artist/create">Create Artist</a></li>
+          <li><a href="/musica/album/create">Create Album</a></li>
+          <li><a href="/musica/song/create">Create Song</a></li>
+          <li><a href="/musica/playlist/create">Create Playlist</a></li>
+          {% else %}
+          {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

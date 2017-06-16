@@ -27,12 +27,11 @@ urlpatterns = [
     url(r'^$', views.home, name="home"),
 
     url(r'^artist/create/$', views.ArtistCreate.as_view(), name='artist_create'),
-    url(r'^song/create', views.SongCreate.as_view(), name="song_create"),
-    url(r'^album/create$', views.AlbumCreate.as_view(), name="album_create"),
-    url(r'^playlist/create', views.PlaylistCreate.as_view(), name="playlist_create"),
+    url(r'^song/create/$', views.SongCreate.as_view(), name="song_create"),
+    url(r'^album/create/$', views.AlbumCreate.as_view(), name="album_create"),
+    url(r'^playlist/create/$', views.PlaylistCreate.as_view(), name="playlist_create"),
     # urls's de detalles de los objetos
-    url(r'^artist/(?P<pk>\d+)/$', views.ArtistDetail.as_view(),
-        name='artist_detail'),
+    url(r'^artist/(?P<pk>\d+)/$', views.ArtistDetail.as_view(), name='artist_detail'),
     url(r'^song/(?P<pk>\d+)/$', views.SongDetail.as_view(), name="song_detail"),
     url(r'^album/(?P<pk>\d+)/$', views.AlbumDetail.as_view(), name="album_detail"),
     url(r'^playlist/(?P<pk>\d+)/$', views.PlaylistDetail.as_view(), name="playlist_detail"),

@@ -1,17 +1,9 @@
+{% extends "home.html" %}
 {% block content %}
-
+<h1>Playlist details:</h1>
 <span vocab="http://schema.org/" typeof="playlist">
-
-<h1>
-    <span property="name">{{ playlist.name_playlist }}</span>
-
-
-
-</h1>
-
-<h2>Playlist details:</h2>
+<h2><span property="name">{{ playlist.name_playlist }}</span></h2>
 <p>
-
     id_playlist : <span property="id_playlist"> {{ playlist.id_playlist  }} </span><br/>
     Name playlist: <span property="name_playlist"> {{ playlist.name_playlist }} </span><br/>
     Name song: <span property="name_song"> {{ playlist.song.name_song }} </span><br/>

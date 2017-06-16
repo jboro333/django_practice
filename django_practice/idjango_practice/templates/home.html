@@ -9,37 +9,8 @@
     <link rel="stylesheet" href="templates/static/style.css">
 </head>
 <div id="body">
-    <div id="header">
-        <h1><a href="/">Tu Música</a></h1>
-        <nav>
-					 <ul>
-              {% if user.is_authenticated %}
-                  <li><a href="/logout">Logout</a></li>
-								  <li><a href="/contact">Contacto</a></li>
-              {% else %}
-                <li><a href="/login/">Login</a><li>
-								<li><a href="/contact">Contacto</a></li
-              {% endif %}
-						</ul>
-        </nav>
-		</header>
-		<section>
-        <nav>
-          <h3>Menú</h3
-            <ul>
-              <li><a href="/musica/artists/">See Artists</a></li>
-              <li><a href="/musica/albums/">See Albums</a></li>
-              <li><a href="/musica/songs/">See Songs</a></li>
-              <li><a href="/musica/playlists/">See Playlist</a></li>
-							{% if user.is_authenticated %}
-              <li><a href="/musica/artist/create">Create Artists</a></li>
-              <li><a href="/musica/album/create">Create Albums</a></li>
-              <li><a href="/musica/song/create">Create Songs</a></li>
-              <li><a href="/musica/playlist/create">Create Playlist</a></li>
-							{% else %}
-							{% endif %}
-            </ul>
-        </nav>
+        {% include "header.html" %}
+        <section>
         {% block contact %}
         {% endblock %}
         {% block artist_list %}
@@ -50,7 +21,21 @@
         {% endblock %}
         {% block song_list %}
         {% endblock %}
-        {% block form %}
+        {% block artist_create %}
+        {% endblock %}
+        {% block album_create %}
+        {% endblock %}
+        {% block song_create %}
+        {% endblock %}
+        {% block playlist_create %}
+        {% endblock %}
+        {% block album_detail %}
+        {% endblock %}
+        {% block song_detail %}
+        {% endblock %}
+        {% block artist_detail %}
+        {% endblock %}
+        {% block playlist_detail %}
         {% endblock %}
     </section>
     {% include "footer.html" %}
