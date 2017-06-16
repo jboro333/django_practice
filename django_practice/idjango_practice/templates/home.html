@@ -14,19 +14,13 @@
         <nav>
 					 <ul>
               {% if user.is_authenticated %}
-							  <ul>
-                	<li><a href="/logout">Logout</a></li>
-									<li><a href="/contact">Contacto</a></li>
-
+                  <li><a href="/logout">Logout</a></li>
+								  <li><a href="/contact">Contacto</a></li>
               {% else %}
-
                 <li><a href="/login/">Login</a><li>
 								<li><a href="/contact">Contacto</a></li
-
               {% endif %}
-
 						</ul>
-
         </nav>
 		</header>
 		<section>
@@ -34,7 +28,7 @@
           <h3>Menú</h3
             <ul>
               <li><a href="/musica/artists/">See Artists</a></li>
-              <li><a href="/music/albums/">See Albums</a></li>
+              <li><a href="/musica/albums/">See Albums</a></li>
               <li><a href="/musica/songs/">See Songs</a></li>
               <li><a href="/musica/playlists/">See Playlist</a></li>
 							{% if user.is_authenticated %}
@@ -46,29 +40,6 @@
 							{% endif %}
             </ul>
         </nav>
-
-<<<<<<< HEAD
-=======
-					{% if user.is_authenticated %}
-					<h3>API</h3
-					<ul>
-<<<<<<< HEAD
-						<li><a href="/musica/api/artist/">API Artists</a></li>
-						<li><a href="/musica/api/album">API Albums</a></li>
-						<li><a href="/musica/api/song">API Songs</a></li>
-					<li><a href="/musica/api/playlist">API Playlist</a></li>-->
-	
-=======
-
-						<li><a href="/musica/api/artist/">API Artists</a></li>
-						<li><a href="/musica/api/album">API Albums</a></li>
-						<li><a href="/musica/api/song">API Songs</a></li>
-					<li><a href="/musica/api/playlist">API Playlist</a></li>
-
->>>>>>> bf143482511572a66c626b18ada95b822b3b92d9
-					{% endif %}
->>>>>>> 1298b748da2032fd6da16dbe542066c51f157335
-				</ul>
         {% block contact %}
         {% endblock %}
         {% block artist_list %}
@@ -78,6 +49,8 @@
         {% block album_list %}
         {% endblock %}
         {% block song_list %}
+        {% endblock %}
+        {% block form %}
         {% endblock %}
     </section>
     {% include "footer.html" %}
